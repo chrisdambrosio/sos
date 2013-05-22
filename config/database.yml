@@ -13,7 +13,3 @@ development:
 test:
   <<: *default
   database: pagernova_development
-
-production:
-  <<: *default
-  database: pagernova_production
