@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pagernova</title>
+  <title>PagerNova</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-inner">
+    <a class="brand" href="#">PagerNova</a>
+    <ul class="nav">
+      <li><a href="#">Alerts</a></li>
+      <li><a href="#">Users</a></li>
+    </ul>
+  </div>
+</div>
+<div id="main">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="content-body">
+    <%= yield %>
+  </div>
+  <div class="footer">
+  </div>
+</div>
 </body>
 </html>
