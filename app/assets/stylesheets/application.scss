@@ -58,3 +58,11 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
     width: 97.5%;
   }
 }
+
+.condensed-table {
+  border: 1px solid #C2C2C2;
+  border-collapse: separate;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+}

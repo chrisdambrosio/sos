@@ -9,16 +9,16 @@
 <body>
 <div class="navbar navbar-inverse navbar-static-top">
   <div class="navbar-inner">
-    <a class="brand" href="#">PagerNova</a>
+    <a class="brand" href="/">PagerNova</a>
     <ul class="nav">
-      <li><a href="#">Alerts</a></li>
-      <li><a href="#">Users</a></li>
+      <li><a href="/alerts">Alerts</a></li>
+      <li><a href="/users">Users</a></li>
     </ul>
   </div>
 </div>
 <div id="main">
   <div class="page-header">
-    <h1>Dashboard</h1>
+    <h1><%= @page_header %></h1>
   </div>
   <div class="content-body">
     <%= yield %>

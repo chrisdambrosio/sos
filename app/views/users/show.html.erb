@@ -1,0 +1,12 @@
+<div id="user-profile">
+  <table class="table table-condensed" style="width: auto;">
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%= mail_to @user.email %></td>
+    </tr>
+  </table>
+</div>

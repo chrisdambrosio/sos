@@ -1,0 +1,9 @@
+<table class="table table-condensed zebra-striped table-striped table-bordered table-hover">
+  <tr><th>Name</th><th>Email</th></tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, user_path(user) %></td>
+      <td><%= mail_to user.email %></td>
+    </tr>
+  <% end %>
+</table>
