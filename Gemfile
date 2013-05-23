@@ -33,7 +33,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'minitest-spec-rails'
+  gem 'rspec-rails', '~> 2.0'
   gem 'pry'
 end
 
