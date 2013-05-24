@@ -5,6 +5,7 @@ Pagernova::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :contact_methods
+      resources :users
     end
   end
 end
