@@ -2,24 +2,39 @@ class Api::V1::ContactMethodsController < Api::V1::BaseController
   respond_to :json
 
   def index
-    @contact_methods = ContactMethod.all
-    respond_with(@contact_methods)
+    @contact_method = ContactMethod.all
+    respond_after
   end
 
   def show
     @contact_method = ContactMethod.find params[:id]
-    respond_with @contact_method
+    respond_after
   end
 
   def update
     @contact_method = ContactMethod.find params[:id]
     @contact_method.update_attributes(contact_method_params)
-    respond_with @contact_method
+    respond_after
+  end
+
+  def create
+    @contact_method = ContactMethod.create(contact_method_params)
+    respond_after
+  end
+
+  def destroy
+    @contact_method = ContactMethod.find params[:id]
+    @contact_method.destroy
+    respond_after
   end
 
   private
 
   def contact_method_params
     params.require(:contact_method).permit(:label, :address, :type_id, :user_id)
+  end
+
+  def respond_after
+    respond_with :api, :v1, @contact_method
   end
 end

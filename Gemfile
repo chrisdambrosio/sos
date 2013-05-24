@@ -41,6 +41,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda'
   gem 'rack-test'
+  gem 'json_spec'
 end
 
 gem 'twitter-bootstrap-rails'
