@@ -3,6 +3,6 @@ FactoryGirl.define do
     label "mobile"
     type_id 0
     address "5555555555"
-    user User.new
+    user { User.new }
   end
 end
