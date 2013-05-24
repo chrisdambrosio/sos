@@ -1,5 +1,7 @@
 class Api::V1::ContactMethodsController < Api::V1::BaseController
   respond_to :json
+  rescue_from StandardError, with: :internal_server_error
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     @contact_method = ContactMethod.all
@@ -36,5 +38,13 @@ class Api::V1::ContactMethodsController < Api::V1::BaseController
 
   def respond_after
     respond_with :api, :v1, @contact_method
+  end
+
+  def record_not_found(error)
+    render json: { error: 'not found' }, status: :not_found
+  end
+
+  def internal_server_error
+    render json: { error: 'internal server error' }, status: :internal_server_error
   end
 end

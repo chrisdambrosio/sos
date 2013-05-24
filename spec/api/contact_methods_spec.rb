@@ -35,4 +35,14 @@ describe "/api/v1/contact_methods", :type => :api do
     response.should be_successful
     ContactMethod.where(id: contact_method.id).should be_empty
   end
+
+  it 'should respond to 404' do
+    get "#{url}/nil.json"
+    response.should be_not_found
+  end
+
+  it 'should handle server errors' do
+    post "#{url}.json", '{ this is not real json }'
+    response.should be_error
+  end
 end
