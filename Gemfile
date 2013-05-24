@@ -33,12 +33,13 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.0'
   gem 'pry'
 end
 
 group :test do
+  gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails'
+  gem 'shoulda'
 end
 
 gem 'twitter-bootstrap-rails'
