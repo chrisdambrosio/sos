@@ -5,15 +5,12 @@ describe Notification do
     subject.contact_method.should be_true
   end
 
-  it 'is invalid without a contact_method' do
-    FactoryGirl.build(:notification, contact_method: nil).should be_invalid
-  end
-
-  it 'has a alert' do
+  it 'has an alert' do
     subject.alert.should be_true
   end
 
-  it 'is invalid without a alert' do
-    FactoryGirl.build(:notification, alert: nil).should be_invalid
-  end
+  it { should validate_presence_of :alert }
+  it { should validate_presence_of :contact_method }
+  it { should belong_to :contact_method }
+  it { should belong_to :alert }
 end

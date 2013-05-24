@@ -11,7 +11,5 @@ describe Alert do
     subject.details.should be_true
   end
 
-  it 'is invalid without a description' do
-    FactoryGirl.build(:alert, description: nil).should be_invalid
-  end
+  it { should validate_presence_of :description }
 end

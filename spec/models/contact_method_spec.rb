@@ -16,4 +16,6 @@ describe ContactMethod do
   it 'has a user' do
     subject.user.should be_true
   end
+
+  it { should belong_to :user }
 end
