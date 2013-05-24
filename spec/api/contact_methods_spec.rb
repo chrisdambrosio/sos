@@ -5,16 +5,15 @@ describe "/api/v1/contact_methods", :type => :api do
   let(:url) { "/api/v1/contact_methods" }
 
   it 'should respond to #index' do
-    json = contact_method.to_json
     get "#{url}.json"
     response.should be_ok
-    response.body.should include_json(json)
+    response.body.should have_json_path('contact_methods')
   end
 
   it 'should respond to #show' do
     get "#{url}/#{contact_method.id}.json"
     response.should be_ok
-    response.body.should eq(contact_method.to_json)
+    response.body.should have_json_path('contact_method')
   end
 
   it 'should respond to #update' do
