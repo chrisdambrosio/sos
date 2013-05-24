@@ -40,6 +40,7 @@ group :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails'
   gem 'shoulda'
+  gem 'rack-test'
 end
 
 gem 'twitter-bootstrap-rails'
