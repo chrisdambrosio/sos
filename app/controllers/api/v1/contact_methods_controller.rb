@@ -1,10 +1,11 @@
 class Api::V1::ContactMethodsController < Api::V1::BaseController
   respond_to :json
+  before_action :find_user
   rescue_from StandardError, with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @contact_method = ContactMethod.all
+    @contact_method = ContactMethod.where(user_id: @user.id)
     respond_after
   end
 
@@ -20,7 +21,10 @@ class Api::V1::ContactMethodsController < Api::V1::BaseController
   end
 
   def create
-    @contact_method = ContactMethod.create(contact_method_params)
+    contact_method_params[:user_id] = User.find(params[:user_id])
+    @contact_method = ContactMethod.create(
+      contact_method_params.merge(user_id: @user.id)
+    )
     respond_after
   end
 
@@ -36,8 +40,12 @@ class Api::V1::ContactMethodsController < Api::V1::BaseController
     params.require(:contact_method).permit(:label, :address, :type_id, :user_id)
   end
 
+  def find_user
+    @user = User.find(params[:user_id])
+  end
+
   def respond_after
-    respond_with :api, :v1, @contact_method
+    respond_with :api, :v1, @user, @contact_method
   end
 
   def record_not_found(error)

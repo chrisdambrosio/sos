@@ -4,8 +4,9 @@ Pagernova::Application.routes.draw do
   root to: 'home#index'
   namespace :api do
     namespace :v1 do
-      resources :contact_methods
-      resources :users
+      resources :users do
+        resources :contact_methods
+      end
     end
   end
 end
