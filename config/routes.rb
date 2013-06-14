@@ -6,6 +6,7 @@ Pagernova::Application.routes.draw do
     namespace :v1 do
       resources :users do
         resources :contact_methods
+        resources :notification_rules
       end
     end
   end
