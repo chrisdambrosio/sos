@@ -1,3 +1,98 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#contact-method-list {
+  padding-top: 10px;
+}
+
+#contact-method-list, #notification-rule-list {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-collapse: separate;
+  border: 1px solid #BBBBBB;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.contact-method-list, .contact-method-group {
+  margin: 0 10px 10px;
+  padding: 0px 10px;
+  position: relative;
+  min-height: 36px;
+}
+
+.contact-method-group h4 {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 90px;
+}
+
+.contact-method-list, .notification-rule-list {
+  border-collapse: separate;
+}
+
+.contact-method-group .contact-methods-container {
+  margin-left: 90px;
+  padding-top: 6px;
+  padding-bottom: 10px;
+}
+
+.contact-method-group .contact-methods-container .contact-methods .contact-method .padded {
+  margin-top: 7px;
+  margin-bottom: 12px;
+}
+
+.contact-method-group .contact-methods-container .contact-methods .contact-method .address-display {
+  float: left;
+  width: 475px;
+  margin-right: 80px;
+  word-break: break-all;
+}
+
+.contact-method-group .contact-methods-container .add_contact_method {
+  float: left;
+  margin-top: 6px;
+  clear: both;
+  margin-bottom: 9px;
+}
+
+.contact-methods .contact-method .cm-form {
+  -moz-border-radius: 4px 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #EAEAEA;
+  float: left;
+  margin-bottom: 5px;
+  padding: 5px 0;
+  width: 525px;
+}
+
+.contact-method form {
+  margin: 0;
+}
+
+.contact-method .cm-label {
+  float: left;
+  width: 120px;
+}
+
+.contact-method .address {
+  float: left;
+  width: 225px;
+  margin-left: 5px;
+}
+
+.contact-method input.contact-method-address {
+  width: 205px;
+}
+
+.contact-method .btn {
+  float: right;
+  margin-right: 6px;
+}
+
+.contact-method .cm-label select {
+  width: 110px;
+}
