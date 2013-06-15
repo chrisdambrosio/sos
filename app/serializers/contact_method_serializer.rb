@@ -1,3 +1,3 @@
 class ContactMethodSerializer < ActiveModel::Serializer
-  attributes :id, :label, :address, :type_id, :user_id
+  attributes :id, :label, :address, :type, :user_id
 end
