@@ -1,1 +1,3 @@
-class Api::V1::BaseController < ActionController::Base; end
+class Api::V1::BaseController < ActionController::Base
+  responders :json
+end

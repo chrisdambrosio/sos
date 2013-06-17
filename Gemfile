@@ -49,6 +49,9 @@ gem 'twitter-bootstrap-rails'
 gem "active_model_serializers", "~> 0.8.0"
 
 gem 'ejs'
+
+gem 'responders'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
