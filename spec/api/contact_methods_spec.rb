@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "/api/v1/:users/contact_methods", :type => :api do
+describe "/api/v1/:users/contact_methods", :contact_type => :api do
   let(:user) { create(:user) }
   let(:contact_method) { create(:contact_method, user: user) }
   let(:base_url) { "/api/v1/users/#{user.id}/contact_methods" }
@@ -28,7 +28,7 @@ describe "/api/v1/:users/contact_methods", :type => :api do
     post "#{base_url}.json", build(:contact_method, label: 'tardis').as_json
     response.should be_successful
     JSON.parse(response.body)['contact_method']['label'].should eq('tardis')
-    JSON.parse(response.body)['contact_method']['type'].should eq('sms')
+    JSON.parse(response.body)['contact_method']['contact_type'].should eq('sms')
   end
 
   it 'should respond to #delete' do

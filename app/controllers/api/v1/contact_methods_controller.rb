@@ -37,7 +37,7 @@ class Api::V1::ContactMethodsController < Api::V1::BaseController
   private
 
   def contact_method_params
-    params.require(:contact_method).permit(:label, :address, :type_id, :user_id)
+    params.require(:contact_method).permit(:label, :address, :type_id, :contact_type, :user_id)
   end
 
   def find_user

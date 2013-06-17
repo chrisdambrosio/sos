@@ -5,8 +5,8 @@ describe ContactMethod do
     subject.label.should be_true
   end
 
-  it 'has a type' do
-    subject.type.should be_true
+  it 'has a contact_type' do
+    subject.contact_type.should be_true
   end
 
   it 'has an address' do
