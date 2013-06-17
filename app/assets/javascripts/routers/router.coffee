@@ -3,16 +3,11 @@ class App.Router extends Backbone.Router
     "users/:id(/)": "user"
   user: (id) ->
     options = { user : { id: id } }
-    window.contactMethods = new App.Collections.ContactMethods([], options)
-    window.contactMethodsView = new App.Views.ContactMethods
+    contactMethods = new App.Collections.ContactMethods([], options)
+    contactMethodsView = new App.Views.ContactMethods
       collection: contactMethods
-    window.contactMethods.fetch(reset:true)
-    $ -> $('#contact-method-list a').on 'click', ->
-      type = $(this).data('type')
-      contactMethod = new App.Models.ContactMethod(type:type)
-      contactMethodForm = new App.Views.ContactMethodForm(contactMethod)
-      $(".contact-methods-#{contactMethod.get('type')} .contact-methods")
-        .append contactMethodForm.render().el
+    $('#contact-method-list').html(contactMethodsView.render().el)
+    contactMethods.fetch(reset:true)
 
 App.router = new App.Router()
 Backbone.history.start(pushState:true)

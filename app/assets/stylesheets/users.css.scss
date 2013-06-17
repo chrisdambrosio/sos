@@ -96,3 +96,27 @@
 .contact-method .cm-label select {
   width: 110px;
 }
+
+.contact-method .contact-buttons {
+  float: right;
+  width: 60px;
+  margin-left: -70px;
+}
+
+.contact-method .contact-buttons a {
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
+  padding-top: 5px;
+  font-size: 22px;
+  color: #404040;
+}
+
+.contact-method .contact-buttons a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+#contact-method-list .add-contact-method:hover {
+  cursor: pointer;
+}

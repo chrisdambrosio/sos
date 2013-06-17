@@ -1,8 +1,10 @@
-<div class="contact-method">
-  <div id="contact-method-<%= id %>">
-    <div class="address-display padded">
-      <span><%= address %> (<%= label %>)</span>
-    </div>
-    <div class="clearfix"></div>
+<div id="contact-method-<%= id %>">
+  <div class="address-display padded">
+    <span><%= address %> (<%= label %>)</span>
   </div>
+  <div class="contact-buttons">
+    <a class="remove icon-remove" href="#" rel="tooltip" data-original-title="Remove"></a>
+    <a class="edit icon-pencil" href="#" rel="tooltip" title="Edit"></a>
+  </div>
+  <div class="clearfix"></div>
 </div>
