@@ -37,7 +37,8 @@ class Api::V1::NotificationRulesController < Api::V1::BaseController
   private
 
   def notification_rule_params
-    params.require(:notification_rule).permit(:contact_method, :start_delay)
+    params.require(:notification_rule).
+      permit(:contact_method_id, :start_delay)
   end
 
   def find_user
