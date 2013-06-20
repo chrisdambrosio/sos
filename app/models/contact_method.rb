@@ -1,5 +1,5 @@
 class ContactMethod < ActiveRecord::Base
-  has_many :notification_rules
+  has_many :notification_rules, dependent: :destroy
   belongs_to :user
   CONTACT_TYPES = { 0 => :sms, 1 => :phone, 2 => :email }
 

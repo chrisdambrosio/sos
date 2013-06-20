@@ -1,14 +1,15 @@
 class App.Views.NotificationRule extends Backbone.View
   initialize: (options) ->
     @contactMethods = options.contactMethods
-    @contactMethods.on 'sync remove', @render
+    @contactMethod = @contactMethods.get(@model.get('contact_method_id'))
+    @contactMethods.on 'sync', @render
+    @contactMethods.on 'remove', @onContactMethodsRemove
   className: 'notification-rule well well-small'
   events:
     'click a.edit': 'edit'
     'click a.remove': 'destroy'
   template: JST['templates/notification_rules/show']
   render: =>
-    @contactMethod = @contactMethods.get(@model.get('contact_method_id'))
     @$el.html(@template(@model.attributes))
     @$el.find('a[rel=tooltip]').tooltip(delay:{show:815})
     this
@@ -26,6 +27,10 @@ class App.Views.NotificationRule extends Backbone.View
     return unless confirm("Delete rule?")
     @model.destroy
       success: => @remove()
+  onContactMethodsRemove: (model) =>
+    if model.id is @model.get('contact_method_id')
+      this.remove()
+      @collection.remove(@model)
 
 class App.Views.NotificationRules extends Backbone.View
   initialize: (options) ->
@@ -62,7 +67,8 @@ class App.Views.NotificationRules extends Backbone.View
 class App.Views.NotificationRuleForm extends Backbone.View
   initialize: (options) ->
     @contactMethods = options.contactMethods
-    @contactMethods.on 'sync remove', @render
+    @contactMethods.on 'sync', @render
+    @contactMethods.on 'remove', @onContactMethodsRemove
   className: 'notification-rule well well-small'
   template: JST['templates/notification_rules/form']
   events:
@@ -99,3 +105,7 @@ class App.Views.NotificationRuleForm extends Backbone.View
       this.undelegateEvents()
       notificationRuleView.setElement(@el)
       notificationRuleView.render()
+  onContactMethodsRemove: (model) =>
+    if model.id is @model.get('contact_method_id')
+      this.remove()
+      @collection.remove(@model)
