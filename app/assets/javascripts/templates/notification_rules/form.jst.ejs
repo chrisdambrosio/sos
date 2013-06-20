@@ -1,0 +1,41 @@
+<div id="notification-rule-new">
+  <form>
+    <div class="alert-message error" style="display: none"></div>
+    <input type="text" name="start-delay-in-minutes" value=<%= start_delay %>>
+    <span>
+      <strong>minutes</strong> after an alert is assigned to me, notify me via
+    </span>
+    <select name="contact-method-id">
+      <% cmGroup = this.contactMethods.where({contact_type: 'email'}); %>
+      <% if (cmGroup.length > 0) { %>
+      <optgroup label="Email">
+        <% for(var i=0; i<cmGroup.length; i++) { %>
+          <option value="<%= cmGroup[i].id %>"><%= cmGroup[i].toString() %></option>
+        <% } %>
+      </optgroup>
+      <% } %>
+      <% cmGroup = this.contactMethods.where({contact_type: 'sms'}); %>
+      <% if (cmGroup.length > 0) { %>
+      <optgroup label="SMS">
+        <% for(var i=0; i<cmGroup.length; i++) { %>
+          <option value="<%= cmGroup[i].id %>"><%= cmGroup[i].toString() %></option>
+        <% } %>
+      </optgroup>
+      <% } %>
+      <% cmGroup = this.contactMethods.where({contact_type: 'phone'}); %>
+      <% if (cmGroup.length > 0) { %>
+      <optgroup label="Phone">
+        <% for(var i=0; i<cmGroup.length; i++) { %>
+          <option value="<%= cmGroup[i].id %>"><%= cmGroup[i].toString() %></option>
+        <% } %>
+      </optgroup>
+      <% } %>
+    </select>
+    <div class="buttons">
+      <input class="btn btn-primary submit" type="submit" value="Save">
+      <input class="btn cancel" name="Cancel" type="button" value="Cancel">
+    </div>
+    <div class="loading"></div>
+  </form>
+  <div class="clearfix"></div>
+</div>

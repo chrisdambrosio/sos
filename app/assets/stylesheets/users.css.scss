@@ -6,9 +6,10 @@
   padding-top: 10px;
 }
 
-#contact-method-list, #notification-rule-list {
+#contact-method-list, .notification-rule-list {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
+  padding-top: 10px;
   border-radius: 4px;
   border-collapse: separate;
   border: 1px solid #BBBBBB;
@@ -69,7 +70,7 @@
   width: 525px;
 }
 
-.contact-method form {
+.contact-method form, .notification-rule form {
   margin: 0;
 }
 
@@ -97,26 +98,87 @@
   width: 110px;
 }
 
-.contact-method .contact-buttons {
+.contact-method .contact-buttons, .notification-rule .rule-buttons {
   float: right;
   width: 60px;
   margin-left: -70px;
 }
 
-.contact-method .contact-buttons a {
-  display: inline-block;
-  float: right;
-  margin-right: 10px;
-  padding-top: 5px;
-  font-size: 22px;
-  color: #404040;
+.contact-method .contact-buttons, .notification-rule .rule-buttons {
+  a {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    padding-top: 5px;
+    font-size: 22px;
+    color: #404040;
+  }
 }
 
-.contact-method .contact-buttons a:hover {
-  opacity: 0.8;
-  text-decoration: none;
+.notification-rule .rule-buttons {
+  width: 120px;
+  a {
+    padding: 0;
+    padding-bottom: 4px;
+  }
+}
+
+.contact-method .contact-buttons, .notification-rule .rule-buttons {
+  a:hover {
+    opacity: 0.8;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
 
 #contact-method-list .add-contact-method:hover {
   cursor: pointer;
+}
+
+.notification-rule-list .add-notification-rule {
+  float: left;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.notification-rule-list .notification-rule {
+  margin: 0 10px 10px;
+  padding: 5px 8px;
+  position: relative;
+}
+
+.notification-rule-list .notification-rule input[type=number], .notification-rule-list .notification-rule input[type=text] {
+  width: 25px;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.notification-rule-list .notification-rule {
+  input, select { margin: 0; }
+}
+
+.notification-rule-list .notification-rule select {
+  width: 250px;
+  margin-left: 5px;
+}
+
+.notification-rule-list .notification-rule .buttons {
+  float: right;
+  width: 140px;
+}
+
+.notification-rule-list .notification-rule .notification-rule-inner {
+  float: left;
+  margin-right: 110px;
+  word-break: break-all;
+}
+
+.notification-rule-list .notification-rule .contact-type-icon {
+  margin: 0 5px;
+}
+
+.blulite {
+  background-color: #BBD8E9;
+  padding: 1px 4px;
+  font-weight: bold;
 }

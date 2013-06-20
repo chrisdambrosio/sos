@@ -18,6 +18,11 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
   font: 13px arial, helvetica, clean, sans-serif;
 
   h1,h2,h3,h4,h5 { color: #404040; }
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 36px;
+  }
   min-width: 1115px;
 
   .page-header {

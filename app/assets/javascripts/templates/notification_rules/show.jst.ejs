@@ -1,0 +1,13 @@
+<div class="notification-rule-inner" id="notification-rule-<%= id %>">
+  <div class="contact-type-icon email icon-envelope-alt"></div>
+  <span>
+    <strong><%= start_delay %> minutes</strong> after an incident is assigned to me,
+    <span class="blulite"><%= this.contactMethod.get('contact_type') %></span> me at <strong><%= this.contactMethod.toString() %></strong>
+  </span>
+</div>
+<div class="rule-buttons">
+  <a class="icon remove icon-remove" data-id="<%= id %>" rel="tooltip" title="Remove"></a>
+  <a class="icon clone icon-copy" data-id="<%= id %>" rel="tooltip" title="Clone +5"></a>
+  <a class="icon edit icon-pencil" data-id="<%= id %>" rel="tooltip" title="Edit"></a>
+</div>
+<div class="clear"></div>

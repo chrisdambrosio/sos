@@ -9,3 +9,5 @@ class App.Models.ContactMethod extends Backbone.Model
     address: null
   toJSON: ->
     { contact_method: @attributes }
+  toString: ->
+    "#{@get('address')} (#{@get('label')})"

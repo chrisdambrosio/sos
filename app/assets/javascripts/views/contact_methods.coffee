@@ -8,10 +8,14 @@ class App.Views.ContactMethod extends Backbone.View
     @$el.html(@template(@model.attributes))
     @$el.find('a[rel=tooltip]').tooltip(delay:{show:815})
     this
-  edit: (e) ->
+  edit: (e) =>
     e.preventDefault()
-    contactMethodForm = new App.Views.ContactMethodForm(model:@model)
-    @$el.html(contactMethodForm.render().el)
+    contactMethodForm = new App.Views.ContactMethodForm
+      model: @model
+      collection: @model.collection
+    this.undelegateEvents()
+    contactMethodForm.setElement(@el)
+    contactMethodForm.render()
   destroy: (e) ->
     return unless confirm("Delete #{@model.get('address')}?")
     e.preventDefault()
@@ -33,7 +37,8 @@ class App.Views.ContactMethods extends Backbone.View
   addAll: () =>
     @collection.forEach(@addOne)
   addOne: (contactMethod) =>
-    contactMethodView = new App.Views.ContactMethod(model: contactMethod)
+    contactMethodView = new App.Views.ContactMethod
+      model: contactMethod
     @$el.find(".contact-methods-#{contactMethod.get('contact_type')} .contact-methods")
       .append(contactMethodView.render().el)
   newContactMethod: (e) =>
@@ -42,6 +47,7 @@ class App.Views.ContactMethods extends Backbone.View
       user_id: @collection.user.id
     contactMethodForm = new App.Views.ContactMethodForm
       model: contactMethod
+      collection: @collection
     $(".contact-methods-#{contactMethod.get('contact_type')} .contact-methods")
       .append contactMethodForm.render().el
 
@@ -61,13 +67,20 @@ class App.Views.ContactMethodForm extends Backbone.View
       address: @$el.find('[name=address]').val()
     @model.save attrs,
       success: (model, response, options) =>
-        contactMethod = new App.Models.ContactMethod(response.contact_method)
-        contactMethodView = new App.Views.ContactMethod(model:contactMethod)
-        @$el.html(contactMethodView.render().el)
-  cancel: (e) ->
+        contactMethod = model.set(response.contact_method)
+        @collection.add(contactMethod)
+        contactMethodView = new App.Views.ContactMethod
+          model: contactMethod
+        this.undelegateEvents()
+        contactMethodView.setElement(@el)
+        contactMethodView.render()
+  cancel: (e) =>
     e.preventDefault()
     if @model.isNew()
       @remove()
     else
-      contactMethodView = new App.Views.ContactMethod(model:@model)
-      @$el.html(contactMethodView.render().el)
+      contactMethodView = new App.Views.ContactMethod
+        model: @model
+      this.undelegateEvents()
+      contactMethodView.setElement(@el)
+      contactMethodView.render()
