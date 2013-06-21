@@ -1,5 +1,5 @@
 <div class="notification-rule-inner" id="notification-rule-<%= id %>">
-  <div class="contact-type-icon email icon-envelope-alt"></div>
+  <div class="contact-type-icon <%= this.contactMethod.get('contact_type') %> <%= this.iconName() %>"></div>
   <span>
     <strong><%= start_delay %> minutes</strong> after an incident is assigned to me,
     <span class="blulite"><%= this.contactMethod.get('contact_type') %></span> me at <strong><%= this.contactMethod.toString() %></strong>

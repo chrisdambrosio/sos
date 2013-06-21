@@ -1,0 +1,23 @@
+<div id="notification-rule-new">
+  <form>
+    <div class="alert-message error" style="display: none"></div>
+    <input type="text" name="start-delay-in-minutes" value=<%= start_delay %>>
+    <span>
+      <strong>minutes</strong> after an alert is assigned to me, notify me via
+    </span>
+    <select name="contact-method-id">
+      <optgroup label="Email">
+        <option value="1">cdambrosio@gmail.com (Home)</option>
+      </optgroup>
+      <optgroup label="SMS">
+        <option value="2">619-337-4925</option>
+      </optgroup>
+    </select>
+    <div class="buttons">
+      <input class="btn btn-primary submit" type="submit" value="Save">
+      <input class="btn cancel" name="Cancel" type="button" value="Cancel">
+    </div>
+    <div class="loading"></div>
+  </form>
+  <div class="clearfix"></div>
+</div>

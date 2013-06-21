@@ -31,6 +31,11 @@ class App.Views.NotificationRule extends Backbone.View
     if model.id is @model.get('contact_method_id')
       this.remove()
       @collection.remove(@model)
+  iconName: ->
+    switch @contactMethod.get('contact_type')
+      when 'email' then 'icon-envelope-alt'
+      when 'sms' then 'icon-mobile-phone'
+      when 'phone' then 'icon-phone'
 
 class App.Views.NotificationRules extends Backbone.View
   initialize: (options) ->
