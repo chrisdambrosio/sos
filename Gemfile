@@ -57,6 +57,9 @@ gem 'responders'
 
 gem 'twilio-ruby'
 
+gem 'clockwork'
+gem 'sucker_punch'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
