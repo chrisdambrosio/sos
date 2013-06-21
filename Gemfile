@@ -45,6 +45,7 @@ group :test do
 end
 
 gem 'twitter-bootstrap-rails'
+gem 'font-awesome-rails'
 
 gem "active_model_serializers", "~> 0.8.0"
 
