@@ -1,6 +1,7 @@
 Pagernova::Application.routes.draw do
   get 'users' => 'users#index'
   get 'users/:id' => 'users#show', as: :user
+  get 'twilio/sms' => 'twilio#sms'
   root to: 'home#index'
   namespace :api do
     namespace :v1 do

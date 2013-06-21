@@ -53,6 +53,8 @@ gem 'ejs'
 
 gem 'responders'
 
+gem 'twilio-ruby'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
