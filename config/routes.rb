@@ -9,6 +9,7 @@ Pagernova::Application.routes.draw do
         resources :contact_methods
         resources :notification_rules
       end
+      resources :alerts
     end
   end
 end
