@@ -1,6 +1,6 @@
 class Api::V1::AlertsController < Api::V1::BaseController
   respond_to :json
-  #rescue_from StandardError, with: :internal_server_error
+  rescue_from StandardError, with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
