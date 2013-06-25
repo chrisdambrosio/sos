@@ -1,5 +1,5 @@
-<a href="#myModal" role="button" class="btn" data-toggle="modal" data-backdrop="">Create New Alert</a>
-<div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<a href="#new-alert-dialog" role="button" class="btn" data-toggle="modal" data-backdrop="">Create New Alert</a>
+<div id="new-alert-dialog" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="myModalLabel">Trigger a new alert</h3>
@@ -9,18 +9,19 @@
       <form class="form-stacked">
         <fieldset>
           <label>Recipient</label>
-          <input type="text">
+          <select name="recipient" class="chzn-select" data-placeholder="Select a recipient">
+          </select>
           <label>Description</label>
-          <input type="text">
+          <input type="text" name="description">
           <label>Details</label>
-          <textarea rows=7></textarea>
+          <textarea rows=7 name="details"></textarea>
         </fieldset>
       </form>
     </div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Create</button>
+    <button class="btn btn-primary submit">Create</button>
   </div>
 </div>
 <div><h3>pages etc</h3></div>

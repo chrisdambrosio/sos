@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require json2
 //= require underscore
+//= require chosen.jquery
 //= require backbone
 //= require_tree ./templates
 //= require app

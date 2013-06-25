@@ -8,6 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *
+ *= require chosen
  *= require_self
  *= require_tree .
  */
@@ -61,6 +63,9 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
 .new-alert-form-content {
   input[type="text"], textarea {
     width: 97.5%;
+  }
+  select {
+    width: 100%;
   }
 }
 
