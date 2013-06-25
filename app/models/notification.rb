@@ -11,11 +11,23 @@ class Notification < ActiveRecord::Base
     auth_token = '96a7560ca19c80bc79ae4afe9238828d'
 
     @client = Twilio::REST::Client.new(account_sid, auth_token)
-    @client.account.sms.messages.create(
-      from: '8583975407',
-      to: contact_method.address,
-      body: alert.description
-    )
+    case contact_method.contact_type
+    when :sms
+      @client.account.sms.messages.create(
+        from: '8583975407',
+        to: contact_method.address,
+        body: alert.description
+      )
+    when :phone
+      url = "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}"
+      puts 'url is ' + url
+      @client.account.calls.create(
+        from: '8583975407',
+        to: contact_method.address,
+        url: "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}",
+        method: 'GET'
+      )
+    end
   end
 
   private
