@@ -20,12 +20,20 @@ class Notification < ActiveRecord::Base
       )
     when :phone
       url = "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}"
-      puts 'url is ' + url
       @client.account.calls.create(
         from: '8583975407',
         to: contact_method.address,
-        url: "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}",
+        url: url,
         method: 'GET'
+      )
+    when :email
+      api_key = 'f37ce78c-7afc-4aa8-99a0-70b8f7635f65'
+      client = Postmark::ApiClient.new(api_key, secure: true)
+      client.deliver(
+        from: 'chris_dambrosio@playstation.sony.com',
+        to: "#{contact_method.user.name} <#{contact_method.address}>",
+        subject: "Alert: #{alert.description}",
+        text_body: alert.description
       )
     end
   end

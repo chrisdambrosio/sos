@@ -56,6 +56,7 @@ gem 'ejs'
 gem 'responders'
 
 gem 'twilio-ruby'
+gem 'postmark'
 
 gem 'clockwork'
 gem 'sucker_punch'
