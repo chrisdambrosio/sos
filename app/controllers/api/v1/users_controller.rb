@@ -1,10 +1,9 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  respond_to :json
   rescue_from StandardError, with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @response = User.all
+    @response = User.limit(@limit).offset(@offset)
     respond_after
   end
 
@@ -37,7 +36,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def respond_after
-    respond_with :api, :v1, @response
+    respond_with :api, :v1, @response, metadata
   end
 
   def record_not_found(error)
