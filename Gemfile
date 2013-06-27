@@ -43,6 +43,7 @@ group :test do
   gem 'shoulda'
   gem 'rack-test'
   gem 'json_spec'
+  gem 'faker'
 end
 
 gem 'twitter-bootstrap-rails'

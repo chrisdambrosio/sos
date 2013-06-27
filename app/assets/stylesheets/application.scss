@@ -10,6 +10,8 @@
  *
  *
  *= require chosen
+ *= require backgrid.min
+ *= require backgrid-select-all
  *= require_self
  *= require_tree .
  */
@@ -26,6 +28,13 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
     line-height: 36px;
   }
   min-width: 1115px;
+
+  input[type=checkbox]:focus, select:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: 1px dotted #666;
+  }
 
   .page-header {
     margin: 20px;

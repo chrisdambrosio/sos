@@ -16,7 +16,10 @@
 //= require json2
 //= require underscore
 //= require chosen.jquery
+//= require moment
 //= require backbone
+//= require backgrid.min
+//= require backgrid-select-all
 //= require_tree ./templates
 //= require app
 //= require_tree ./models
