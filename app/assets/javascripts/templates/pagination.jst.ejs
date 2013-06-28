@@ -1,0 +1,7 @@
+<li class="page-first"><a href="#"><i class="icon-double-angle-left"></i></a></li>
+<li class="page-back"><a href="#"><i class="icon-angle-left"></i></a></li>
+<% for(var i=1; i<=this.collection.pages; i++) { %>
+  <li class="page" data-page="<%= i %>"><a href="#"><%= i %></a></li>
+  <% } %>
+<li class="page-forward"><a href="#"><i class="icon-angle-right"></i></a></li>
+<li class="page-last"><a href="#"><i class="icon-double-angle-right"></i></a></li>

@@ -16,10 +16,17 @@ class App.Router extends Backbone.Router
       notificationRules.fetch(reset:true)
   home: ->
     window.alerts = new App.Collections.Alerts([])
+    window.paginationView = new App.Views.Pagination(collection:alerts)
     grid = new App.Views.AlertGrid
       collection: alerts
-    alerts.fetch reset:true, success: ->
-      $ -> $('.alerts-grid').append(grid.render().$el)
+    alerts.fetch
+      reset: true
+      success: ->
+        $ ->
+          $('.alerts-grid').append(grid.render().$el)
+          $('.pagination').append(paginationView.el)
+      data: { limit: 10, offset: 0 }
+
 
 App.router = new App.Router()
 Backbone.history.start(pushState:true)
