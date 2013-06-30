@@ -1,6 +1,25 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#grid-container {
+  min-height: 200px;
+  background-color: #f7f7f7;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f7f7f7), to(#efefef));
+  background-image: -moz-linear-gradient(top, #f7f7f7, #efefef);
+  background-image: -ms-linear-gradient(top, #f7f7f7, #efefef);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f7f7f7), color-stop(100%, #efefef));
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #efefef);
+  background-image: -o-linear-gradient(top, #f7f7f7, #efefef);
+  background-image: linear-gradient(top, #f7f7f7, #efefef);
+  filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#efefef')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#efefef')";
+  overflow: hidden;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  margin-bottom: 18px;
+}
+
 .backgrid thead th {
   background-color: transparent;
 }
@@ -49,3 +68,23 @@
   outline: none;
 }
 
+.alert-actions {
+  padding: 5px;
+  height: 29px;
+  line-height: 29px;
+  border: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  a.btn-small {
+    margin-bottom: 3px;
+    padding: 4px 12px;
+  }
+  a.new-alert {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
+.alert-actions-top {
+  border: 1px solid #ddd;
+  border-bottom: none;
+}

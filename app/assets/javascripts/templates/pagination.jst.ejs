@@ -1,7 +1,29 @@
-<li class="page-first"><a href="#"><i class="icon-double-angle-left"></i></a></li>
-<li class="page-back"><a href="#"><i class="icon-angle-left"></i></a></li>
-<% for(var i=1; i<=this.collection.pages; i++) { %>
-  <li class="page" data-page="<%= i %>"><a href="#"><%= i %></a></li>
+<div class="pagination pull-right">
+  <ul>
+    <li class="page-first"><a href="#"><i class="icon-double-angle-left"></i></a></li>
+    <li class="page-back"><a href="#"><i class="icon-angle-left"></i></a></li>
+    <% for(var i=1; i<=this.collection.pages; i++) { %>
+      <li class="page" data-page="<%= i %>"><a href="#"><%= i %></a></li>
   <% } %>
-<li class="page-forward"><a href="#"><i class="icon-angle-right"></i></a></li>
-<li class="page-last"><a href="#"><i class="icon-double-angle-right"></i></a></li>
+    <li class="page-forward"><a href="#"><i class="icon-angle-right"></i></a></li>
+    <li class="page-last"><a href="#"><i class="icon-double-angle-right"></i></a></li>
+  </ul>
+</div>
+<div class="pagination-total center-align pull-right">
+  <strong>
+    <%= this.collection.offset + 1 %> to
+    <%= this.collection.length + (this.collection.offset) %> of
+    <%= this.collection.total %>
+  </strong>
+</div>
+<div class="pagecount pull-right">
+  <span>Show</span>
+  <select class="page-size input-mini">
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+  <span>incidents per page</span>
+</div>
+<div class="clearfix"></div>

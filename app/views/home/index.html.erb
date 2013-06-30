@@ -1,8 +1,7 @@
-<a href="#new-alert-dialog" role="button" class="btn" data-toggle="modal" data-backdrop="">Create New Alert</a>
 <div id="new-alert-dialog" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Trigger a new alert</h3>
+    <h3>Trigger a new alert</h3>
   </div>
   <div class="modal-body">
     <div class="new-alert-form-content">
@@ -24,8 +23,10 @@
     <button class="btn btn-primary submit">Create</button>
   </div>
 </div>
-<div>
+<div id="grid-container">
+  <div class="alert-actions alert-actions-top"></div>
   <div class="alerts-grid"></div>
-  <div class="pagination">
-  </div>
+  <div class="pagination-container"></div>
+  <div class="alert-actions alert-actions-bottom"></div>
+  <div class="clearfix"></div>
 </div>

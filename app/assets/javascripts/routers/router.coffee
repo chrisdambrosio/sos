@@ -19,12 +19,14 @@ class App.Router extends Backbone.Router
     window.paginationView = new App.Views.Pagination(collection:alerts)
     grid = new App.Views.AlertGrid
       collection: alerts
+    window.alertActions = new App.Views.AlertActions(grid:grid)
     alerts.fetch
       reset: true
       success: ->
         $ ->
           $('.alerts-grid').append(grid.render().$el)
-          $('.pagination').append(paginationView.el)
+          $('.pagination-container').append(paginationView.el)
+          $('.alert-actions').html(alertActions.render().el)
       data: { limit: 10, offset: 0 }
 
 

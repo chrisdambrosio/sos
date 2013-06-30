@@ -85,3 +85,59 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
   -webkit-border-radius: 4px 4px 4px 4px;
   border-radius: 4px 4px 4px 4px;
 }
+
+.pagination-view {
+  padding: 5px;
+
+  .pagination {
+    font-size: 14px;
+    margin: 0;
+    height: 33px;
+    /*background: gray;*/
+    a {
+      line-height: 23px;
+    }
+  }
+  .pagination-total {
+    margin: 0 25px;
+    padding: 0 7px;
+    border-radius: 4px;
+    height: 31px;
+    line-height: 32px;
+    border:1px solid #dddddd;
+  }
+  .pagecount span {
+    line-height: 33px;
+  }
+  .pagecount select {
+    margin: 0 3px;
+    height: 33px;
+  }
+}
+.pagination-view .pagination ul {
+  background-color: #fff;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fff), to(#f2f2f2));
+  background-image: -moz-linear-gradient(top, #fff, #f2f2f2);
+  background-image: -ms-linear-gradient(top, #fff, #f2f2f2);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #f2f2f2));
+  background-image: -webkit-linear-gradient(top, #fff, #f2f2f2);
+  background-image: -o-linear-gradient(top, #fff, #f2f2f2);
+  background-image: linear-gradient(top, #fff, #f2f2f2);
+  filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#f2f2f2')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#f2f2f2')";
+  box-shadow: 0 0 1px rgba(0,0,0,0.1);
+  a { background-color: transparent; }
+}
+.pagination-view .pagination li:not(:first-child):not(:last-child) a {
+  border-left: none;
+  border-right: none;
+}
+.pagination-view .pagination li:first-child a {
+  border-right: none;
+}
+.pagination-container {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}

@@ -2,19 +2,24 @@ class App.Views.Pagination extends Backbone.View
   initialize: (options) ->
     @collection.on 'sync', => @render()
   template: JST['templates/pagination']
-  tagName: 'ul'
+  className: 'pagination-view'
   render: ->
     @$el.html(@template())
     @$('.page-back').toggleClass('disabled', @isFirstPage())
     @$('.page-forward').toggleClass('disabled', @isLastPage())
     @$(".page").toggleClass('active', false)
     @$(".page[data-page=#{@collection.page}]").toggleClass('active', true)
+    @$(".page-size").val(@collection.limit)
     this
   gotoPageIndex: (pageIndex) ->
       offset = pageIndex * @collection.limit
       data = _.defaults({offset:offset}, @collection.fetchDefaults)
       @collection.fetch(data:data)
   events:
+    'change .page-size': (e) ->
+      limit = $(e.target).val()
+      data = _.defaults({limit:limit, offset: 0}, @collection.fetchDefaults)
+      @collection.fetch(data:data)
     'click li.page': (e) ->
       e.preventDefault()
       page = $(e.target).parent().data('page')

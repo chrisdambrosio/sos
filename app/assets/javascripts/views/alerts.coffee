@@ -43,3 +43,52 @@ class App.Views.AlertGrid extends Backgrid.Grid
       label: 'Status'
       cell: 'string'
     ]
+
+class App.Views.AlertActions extends Backbone.View
+  initialize: (options) ->
+    @grid = options.grid
+  template: JST['templates/alert_actions']
+  render: ->
+    @$el.html(@template())
+    this
+  events:
+    'click a.new-alert': ->
+      alertForm = new App.Views.AlertForm(collection:@grid.collection)
+    'change .page-size': -> console.log 'foo!'
+
+class App.Views.AlertForm extends Backbone.View
+  initialize: ->
+    @setElement('#new-alert-dialog')
+    @$el.modal('show')
+    @resetForm()
+  resetForm: ->
+    @initRecipients()
+    @$('input[name=description]').val('')
+    @$('textarea[name=details]').val('')
+  initRecipients: ->
+    @$('.chzn-select').empty()
+    @$('.chzn-select').append('<option />').chosen()
+    $.getJSON '/api/v1/users.json', (data) =>
+      for user in data.users
+        @$('.chzn-select')
+          .append("<option value=\"#{user.id}\">#{user.name}</option>")
+          .trigger("liszt:updated")
+  events:
+    'click .submit': ->
+      assignedTo = @$('.chzn-select').val()
+      description = @$('input[name=description]').val()
+      details = @$('textarea[name=details]').val()
+      alert = new App.Models.Alert
+        assigned_to: assignedTo
+        description: description
+        details: details
+      alert.save {},
+        success: =>
+          @collection.fetch
+            data:
+              limit: @collection.limit
+              offset: 0
+          @$el.modal('hide')
+          @undelegateEvents()
+        error: ->
+          console.error 'there was an error'
