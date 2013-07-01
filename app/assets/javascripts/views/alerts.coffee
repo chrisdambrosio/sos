@@ -3,14 +3,18 @@ class CustomSortHeaderCell extends Backgrid.HeaderCell
     @collection.on 'sync', => @refresh()
     super
   className: 'sortable'
+  events:
+    'click': 'sort'
   refresh: ->
     @$('.sort-caret').empty()
+    @$el.removeClass('asc').removeClass('desc')
     columnName = @column.get('name')
     if columnName is @collection.sort_by
       orderIcon = switch @collection.order
         when 'asc' then 'icon-caret-up'
         when 'desc' then 'icon-caret-down'
       html = "<i class=\"#{orderIcon}\"></i>"
+      @$el.addClass(@collection.order)
       @$('.sort-caret').html(html)
   sort: ->
     @collection.order = switch @collection.order
