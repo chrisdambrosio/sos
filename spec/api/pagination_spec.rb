@@ -51,4 +51,10 @@ describe "pagination offset/limit/count", :type => :api do
     offset = JSON.parse(response.body)['meta']['offset']
     expect(offset).to eq(0)
   end
+
+  it 'should order by an attribute' do
+    get "/api/v1/users.json?sort_by=id&order=desc"
+    user = JSON.parse(response.body)['users'].first
+    expect(user['id']).to eq(@users.last.id)
+  end
 end

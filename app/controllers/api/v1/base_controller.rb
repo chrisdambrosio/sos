@@ -5,10 +5,11 @@ class Api::V1::BaseController < ActionController::Base
   respond_to :json
   before_action :get_limit,  only: [:index]
   before_action :get_offset, only: [:index]
+  before_action :get_order, only: [:index]
   before_action :get_class
 
   def index
-    @response = (@query || @class).limit(@limit).offset(@offset)
+    @response = sort(@query || @class).limit(@limit).offset(@offset)
     respond_after
   end
 
@@ -61,6 +62,21 @@ class Api::V1::BaseController < ActionController::Base
 
   def get_offset
     @offset = params[:offset].to_i
+  end
+
+  def get_order
+    @sort_by = params[:sort_by]
+    @order = params[:order]
+  end
+
+  def sort(klass)
+    sort_by = klass.column_names.find { |c| c == @sort_by }
+    order = if @order == 'desc' then :desc else :asc end
+    if sort_by
+      klass.order(sort_by.to_sym => order)
+    else
+      klass
+    end
   end
 
   def record_not_found(error)
