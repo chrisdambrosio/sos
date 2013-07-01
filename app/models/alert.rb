@@ -1,6 +1,7 @@
 class Alert < ActiveRecord::Base
   belongs_to :assigned_to, class_name: 'User', foreign_key: :assigned_to
   has_many :notifications
+  has_many :log_entries
   validates :description, presence: true
   validates :assigned_to, presence: true
   scope :assigned, -> { where status: 'assigned' }

@@ -1,6 +1,7 @@
 class Notification < ActiveRecord::Base
   belongs_to :contact_method
   belongs_to :alert
+  has_many :log_entries, as: :objectable
   validates :contact_method, presence: true
   validates :alert, presence: true
   scope :ready_to_send, -> { where(status: 'queued').where('send_at <= ?', Time.now) }
