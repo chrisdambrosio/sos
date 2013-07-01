@@ -1,0 +1,38 @@
+<table class="alert-details-table table table-condensed table-bordered">
+  <tr>
+    <th>Current status</th>
+    <td><%= @alert.status %></td>
+  </tr>
+  <tr>
+    <th>Opened on</th>
+    <td><%= @alert.created_at %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= @alert.description %></td>
+  </tr>
+</table>
+
+<h2>Alert History</h2>
+<div id="le-list">
+  <div id="le-table">
+    <table class="table table-condensed table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>May 6, 2013 at 15:43 (2 months ago)</td>
+        <td>Assigned to Chris D'Ambrosio</td>
+      </tr>
+      <tr>
+        <td>May 6, 2013 at 15:43 (2 months ago)</td>
+        <td>Notified Chris D'Ambrosio by SMS at 619-337-4925</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
