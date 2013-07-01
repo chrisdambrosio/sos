@@ -8,5 +8,12 @@ class App.Collections.Alerts extends Backbone.Collection
     @offset = response.meta.offset
     @pages = Math.ceil(@total / @limit)
     @page = Math.floor(@offset / @limit) + 1
-    @fetchDefaults = { limit: response.meta.limit, offset: response.meta.offset }
     response.alerts
+  fetch: (options) ->
+    options.data = _.defaults(options.data, @fetchDefaults())
+    super(options)
+  fetchDefaults: ->
+      limit: @limit
+      offset: @offset
+      order: @order
+      sort_by: @sort_by

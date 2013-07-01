@@ -88,3 +88,21 @@
   border: 1px solid #ddd;
   border-bottom: none;
 }
+
+.backgrid .is-selected td {
+  background-color: #fafbfd;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fafbfd), to(#dfeaf3));
+  background-image: -moz-linear-gradient(top, #fafbfd, #dfeaf3);
+  background-image: -ms-linear-gradient(top, #fafbfd, #dfeaf3);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafbfd), color-stop(100%, #dfeaf3));
+  background-image: -webkit-linear-gradient(top, #fafbfd, #dfeaf3);
+  background-image: -o-linear-gradient(top, #fafbfd, #dfeaf3);
+  background-image: linear-gradient(top, #fafbfd, #dfeaf3);
+  filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafbfd', EndColorStr='#dfeaf3')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafbfd', EndColorStr='#dfeaf3')";
+  border: 1px solid #CBDDEB;
+}
+
+.backgrid th b.sort-caret {
+  display: inline;
+}

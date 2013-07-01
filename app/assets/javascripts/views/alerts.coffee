@@ -1,15 +1,45 @@
+class CustomSortHeaderCell extends Backgrid.HeaderCell
+  initialize: ->
+    @collection.on 'sync', => @refresh()
+    super
+  className: 'sortable'
+  refresh: ->
+    @$('.sort-caret').empty()
+    columnName = @column.get('name')
+    if columnName is @collection.sort_by
+      orderIcon = switch @collection.order
+        when 'asc' then 'icon-caret-up'
+        when 'desc' then 'icon-caret-down'
+      html = "<i class=\"#{orderIcon}\"></i>"
+      @$('.sort-caret').html(html)
+  sort: ->
+    @collection.order = switch @collection.order
+      when undefined then 'asc'
+      when 'asc' then 'desc'
+    @collection.sort_by = this.column.get('name')
+    @collection.fetch
+      reset: true
+      data:
+        offset: @collection.offset
+        limit: @collection.limit
+        order: @collection.order
+        sort_by: @collection.sort_by
+
 class App.Views.AlertGrid extends Backgrid.Grid
   initialize: (options) ->
     super
       collection:options.collection
       columns: @alertColumns()
+
   alertColumns: ->
     [
       name: ''
-      cell: 'select-row'
+      cell: Backgrid.Extension.SelectRowCell.extend
+        onChange: (e) ->
+          isSelected = $(e.target).is(':checked')
+          $(e.target).closest('tr').toggleClass('is-selected', isSelected)
       headerCell: 'select-all'
     ,
-      editable: false
       name: 'id'
       label: 'ID'
       cell: Backgrid.UriCell.extend
@@ -17,8 +47,10 @@ class App.Views.AlertGrid extends Backgrid.Grid
           Backgrid.UriCell.prototype.render.call(this)
           @$('a').attr('href', "/alerts/#{@model.id}").removeAttr('target')
           this
-    ,
+      sortable: true
       editable: false
+      headerCell: CustomSortHeaderCell
+    ,
       name: 'created_on'
       label: 'Created On'
       cell: Backgrid.StringCell.extend
@@ -27,21 +59,27 @@ class App.Views.AlertGrid extends Backgrid.Grid
           dateStr = moment(@model.get('created_on')).format('ddd MMM DD HH:mm')
           @$el.text(dateStr)
           this
-    ,
+      sortable: false
       editable: false
+    ,
       name: 'description'
       label: 'Description'
       cell: 'string'
-    ,
+      sortable: false
       editable: false
+    ,
       name: 'assigned_to'
       label: 'Assigned To'
       cell: 'string'
-    ,
+      sortable: true
       editable: false
+      headerCell: CustomSortHeaderCell
+    ,
       name: 'status'
       label: 'Status'
       cell: 'string'
+      sortable: false
+      editable: false
     ]
 
 class App.Views.AlertActions extends Backbone.View
@@ -54,7 +92,6 @@ class App.Views.AlertActions extends Backbone.View
   events:
     'click a.new-alert': ->
       alertForm = new App.Views.AlertForm(collection:@grid.collection)
-    'change .page-size': -> console.log 'foo!'
 
 class App.Views.AlertForm extends Backbone.View
   initialize: ->
@@ -85,6 +122,7 @@ class App.Views.AlertForm extends Backbone.View
       alert.save {},
         success: =>
           @collection.fetch
+            reset: true
             data:
               limit: @collection.limit
               offset: 0

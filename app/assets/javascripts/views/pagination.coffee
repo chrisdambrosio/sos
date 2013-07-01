@@ -13,13 +13,17 @@ class App.Views.Pagination extends Backbone.View
     this
   gotoPageIndex: (pageIndex) ->
       offset = pageIndex * @collection.limit
-      data = _.defaults({offset:offset}, @collection.fetchDefaults)
-      @collection.fetch(data:data)
+      @collection.fetch
+        reset: true
+        data:
+          offset: offset
   events:
     'change .page-size': (e) ->
       limit = $(e.target).val()
-      data = _.defaults({limit:limit, offset: 0}, @collection.fetchDefaults)
-      @collection.fetch(data:data)
+      @collection.fetch
+        data:
+          limit: limit
+          offset: 0
     'click li.page': (e) ->
       e.preventDefault()
       page = $(e.target).parent().data('page')
