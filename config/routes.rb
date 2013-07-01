@@ -1,4 +1,5 @@
 Pagernova::Application.routes.draw do
+  devise_for :users
   get 'users' => 'users#index'
   get 'users/:id' => 'users#show', as: :user
   get 'twilio/sms' => 'twilio#sms'

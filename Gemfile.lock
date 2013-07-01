@@ -29,6 +29,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.9)
+    bcrypt-ruby (3.0.1)
     builder (3.1.4)
     celluloid (0.14.1)
       timers (>= 1.0.0)
@@ -43,6 +44,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    devise (3.0.0.rc)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.1)
     diff-lcs (1.2.4)
     ejs (1.1.1)
     erubis (2.7.0)
@@ -79,6 +85,7 @@ GEM
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
+    orm_adapter (0.4.0)
     pg (0.15.1)
     polyglot (0.3.3)
     postmark (1.0.0)
@@ -181,6 +188,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.1)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -189,6 +198,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.8.0)
   clockwork
   coffee-rails (~> 4.0.0)
+  devise (= 3.0.0.rc)
   ejs
   factory_girl_rails
   faker
