@@ -7,23 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if user_signed_in? %>
 <div class="navbar navbar-inverse navbar-static-top">
   <div class="navbar-inner">
     <a class="brand" href="/">PagerNova</a>
     <ul class="nav">
-      <li><a href="/alerts">Alerts</a></li>
+      <li><a href="/">Alerts</a></li>
       <li><a href="/users">Users</a></li>
     </ul>
+    <ul class="nav pull-right">
+      <li><a href="/users/<%= current_user.id %>"><i class="icon-user"></i> My Profile</a></li>
+      <li>
+        <%= link_to(destroy_user_session_path, method: :delete) do %>
+          <i class="icon-signout"></i> Sign Out
+        <% end %>
+      </li>
   </div>
 </div>
-<div id="main">
+<% end %>
+<div id="main" class="<%= @main_class %>">
   <div class="page-header">
     <h1><%= @page_header %></h1>
   </div>
   <div class="content-body">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+    <%= render partial: 'layouts/messages' %>
     <%= yield %>
   </div>
   <div class="footer">
