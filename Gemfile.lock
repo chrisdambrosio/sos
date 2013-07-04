@@ -156,6 +156,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    state_machine (1.2.0)
     sucker_punch (0.5.1)
       celluloid (~> 0.14.1)
     therubyracer (0.11.4)
@@ -216,6 +217,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   shoulda
+  state_machine
   sucker_punch
   therubyracer
   turbolinks

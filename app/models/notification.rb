@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
   belongs_to :contact_method
   belongs_to :alert
-  has_many :log_entries, as: :objectable
+  has_many :log_entries
   validates :contact_method, presence: true
   validates :alert, presence: true
   scope :ready_to_send, -> { where(status: 'queued').where('send_at <= ?', Time.now) }
@@ -37,11 +37,22 @@ class Notification < ActiveRecord::Base
         text_body: alert.description
       )
     end
+    log_notification
+  end
+
+  def log_notification
+    LogEntry.create(alert: alert, action: 'notify', notification: self, user: contact_method.user)
+  end
+
+  def contact_type
+    super.to_sym unless super.nil?
   end
 
   private
 
   def before_create_hook
+    self.contact_type = contact_method.contact_type
+    self.address = contact_method.address
     self.status = 'queued'
   end
 end

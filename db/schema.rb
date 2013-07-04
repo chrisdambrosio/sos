@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130701221400) do
+ActiveRecord::Schema.define(version: 20130704005205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(version: 20130701221400) do
     t.text     "details"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
     t.integer  "assigned_to"
+    t.integer  "status"
   end
+
+  add_index "alerts", ["status"], name: "index_alerts_on_status", using: :btree
 
   create_table "contact_methods", force: true do |t|
     t.string   "label"
@@ -39,15 +41,18 @@ ActiveRecord::Schema.define(version: 20130701221400) do
   create_table "log_entries", force: true do |t|
     t.integer  "alert_id"
     t.string   "action"
-    t.integer  "subjectable_id"
-    t.string   "subjectable_type"
-    t.integer  "objectable_id"
-    t.string   "objectable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.json     "channel"
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.string   "agent_type"
+    t.integer  "notification_id"
   end
 
   add_index "log_entries", ["alert_id"], name: "index_log_entries_on_alert_id", using: :btree
+  add_index "log_entries", ["notification_id"], name: "index_log_entries_on_notification_id", using: :btree
+  add_index "log_entries", ["user_id"], name: "index_log_entries_on_user_id", using: :btree
 
   create_table "notification_rules", force: true do |t|
     t.integer  "contact_method_id"
@@ -65,6 +70,8 @@ ActiveRecord::Schema.define(version: 20130701221400) do
     t.datetime "updated_at"
     t.string   "status"
     t.datetime "send_at"
+    t.string   "contact_type"
+    t.string   "address"
   end
 
   add_index "notifications", ["alert_id"], name: "index_notifications_on_alert_id", using: :btree
