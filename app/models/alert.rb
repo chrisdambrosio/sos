@@ -21,7 +21,7 @@ class Alert < ActiveRecord::Base
     end
 
     event :resolved do
-      transition :acknowledged => :resolved
+      transition [:triggered, :acknowledged] => :resolved
     end
 
     state :triggered do

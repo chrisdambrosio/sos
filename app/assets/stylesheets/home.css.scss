@@ -124,3 +124,26 @@
 .backgrid th b.sort-caret {
   display: inline;
 }
+
+.alerts-grid td.status-cell:first-letter {
+  text-transform: capitalize;
+}
+
+.alerts-grid .status-cell-triggered {
+  color: #a60000;
+}
+.alerts-grid .status-cell-acknowledged {
+  color: #ff4500;
+}
+.alerts-grid .status-cell-resolved {
+  color: #00a600;
+}
+.alerts-grid .status-row-triggered {
+  border-left: #a60000 5px solid;
+}
+.alerts-grid .status-row-acknowledged {
+  border-left: #ff4500 5px solid;
+}
+.alerts-grid .status-row-resolved {
+  border-left: #00a600 5px solid;
+}

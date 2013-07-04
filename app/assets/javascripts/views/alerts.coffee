@@ -29,19 +29,28 @@ class CustomSortHeaderCell extends Backgrid.HeaderCell
         order: @collection.order
         sort_by: @collection.sort_by
 
+class CustomRow extends Backgrid.Row
+  render: ->
+    @$el.attr('class', "status-row-#{@model.get('status')}")
+    super
+
+class CustomSelectRowCell extends Backgrid.Extension.SelectRowCell
+  onChange: (e) ->
+    isSelected = $(e.target).is(':checked')
+    $(e.target).closest('tr').toggleClass('is-selected', isSelected)
+    super
+
 class App.Views.AlertGrid extends Backgrid.Grid
   initialize: (options) ->
     super
+      row: CustomRow
       collection:options.collection
       columns: @alertColumns()
 
   alertColumns: ->
     [
       name: ''
-      cell: Backgrid.Extension.SelectRowCell.extend
-        onChange: (e) ->
-          isSelected = $(e.target).is(':checked')
-          $(e.target).closest('tr').toggleClass('is-selected', isSelected)
+      cell: CustomSelectRowCell
       headerCell: 'select-all'
     ,
       name: 'id'
@@ -74,14 +83,26 @@ class App.Views.AlertGrid extends Backgrid.Grid
     ,
       name: 'assigned_to'
       label: 'Assigned To'
-      cell: 'string'
+      cell: Backgrid.StringCell.extend
+        render: ->
+          Backgrid.StringCell.prototype.render.call(this)
+          url = "/users/#{@model.get('assigned_to').id}"
+          name = @model.get('assigned_to').name
+          html = "<a href=\"#{url}\">#{name}</a>"
+          @$el.html(html)
+          this
       sortable: true
       editable: false
       headerCell: CustomSortHeaderCell
     ,
       name: 'status'
       label: 'Status'
-      cell: 'string'
+      cell: Backgrid.StringCell.extend
+        className: 'status-cell'
+        render: ->
+          status = @model.get('status')
+          @$el.addClass("status-cell-#{status}").text(status)
+          this
       sortable: false
       editable: false
     ]
@@ -96,6 +117,16 @@ class App.Views.AlertActions extends Backbone.View
   events:
     'click a.new-alert': ->
       alertForm = new App.Views.AlertForm(collection:@grid.collection)
+    'click a.resolve-alerts': ->
+      alerts = @grid.getSelectedModels()
+      for alert in alerts
+        alert.save {status:'resolved'}, patch:true, wait:true, success: ->
+          alert.trigger('backgrid:select', alert, false)
+    'click a.ack-alerts': ->
+      alerts = @grid.getSelectedModels()
+      for alert in alerts
+        alert.save {status:'acknowledged'}, patch:true, wait:true, success: ->
+          alert.trigger('backgrid:select', alert, false)
 
 class App.Views.AlertForm extends Backbone.View
   initialize: ->

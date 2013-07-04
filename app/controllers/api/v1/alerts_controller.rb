@@ -3,7 +3,7 @@ class Api::V1::AlertsController < Api::V1::BaseController
   before_action :set_channel, only: [:create, :update]
 
   def update
-    set_user
+    set_user if strong_params[:assigned_to]
     status_name = strong_params.delete('status')
     @response = @class.find params[:id]
     if @response.update_attributes(strong_params)

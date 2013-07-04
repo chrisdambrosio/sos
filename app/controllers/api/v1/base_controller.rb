@@ -1,5 +1,5 @@
 class Api::V1::BaseController < ActionController::Base
-  rescue_from StandardError, with: :internal_server_error
+  #rescue_from StandardError, with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   responders :json
   respond_to :json

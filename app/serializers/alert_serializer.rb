@@ -1,8 +1,9 @@
 class AlertSerializer < ActiveModel::Serializer
-  attributes :id, :description, :details, :status, :assigned_to, :created_on
+  attributes :id, :description, :details, :status, :created_on
+  has_one :assigned_to
 
-  def assigned_to
-    object.assigned_to.id
+  def status
+    object.status_name
   end
 
   def created_on
