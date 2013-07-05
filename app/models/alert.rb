@@ -4,6 +4,7 @@ class Alert < ActiveRecord::Base
   has_many :log_entries
   validates :description, presence: true
   validates :assigned_to, presence: true
+  default_scope order: 'created_at DESC'
   scope :assigned, -> { where status: 'assigned' }
   after_save :after_save_hook
   after_create :after_create_hook
