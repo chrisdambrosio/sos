@@ -5,6 +5,10 @@ describe "/api/v1/alerts", :contact_type => :api do
   let(:alert) { create(:alert, assigned_to: user) }
   let(:base_url) { "/api/v1/alerts" }
 
+  before(:each) do
+    login_as(user, scope: :user)
+  end
+
   it 'should respond to #index' do
     get "#{base_url}.json"
     response.should be_ok
@@ -31,7 +35,8 @@ describe "/api/v1/alerts", :contact_type => :api do
     post "#{base_url}.json", json
     response.should be_successful
     JSON.parse(response.body)['alert']['description'].should eq('tardis')
-    JSON.parse(response.body)['alert']['assigned_to'].should eq(user.id)
+    JSON.parse(response.body)['alert']['assigned_to']['name'].
+      should eq(user.name)
   end
 
   it 'should respond to #delete' do

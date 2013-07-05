@@ -1,11 +1,11 @@
 class Api::V1::BaseController < ActionController::Base
-  #rescue_from StandardError, with: :internal_server_error
+  rescue_from StandardError, with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   responders :json
   respond_to :json
   before_action :get_limit,  only: [:index]
   before_action :get_offset, only: [:index]
-  before_action :get_order, only: [:index]
+  before_action :get_order,  only: [:index]
   before_action :get_class
 
   def index

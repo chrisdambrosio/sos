@@ -24,7 +24,9 @@ describe "/api/v1/users", :type => :api do
   end
 
   it 'should respond to #create' do
-    post "#{url}.json", build(:user, name: 'tardis').as_json
+    json = build(:user, name: 'tardis').as_json
+    json['user'].merge!(password: '1s#fdk34')
+    post "#{url}.json", json
     response.should be_successful
     JSON.parse(response.body)['user']['name'].should eq('tardis')
   end

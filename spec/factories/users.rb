@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :user do
     name "John Henry"
     email "john_henry@zeiracorp.com"
+    password "whyisamathbooksosad"
   end
 end
