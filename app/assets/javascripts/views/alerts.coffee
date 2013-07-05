@@ -30,6 +30,9 @@ class CustomSortHeaderCell extends Backgrid.HeaderCell
         sort_by: @collection.sort_by
 
 class CustomRow extends Backgrid.Row
+  initialize: ->
+    @model.on 'sync', => @render()
+    super
   render: ->
     @$el.attr('class', "status-row-#{@model.get('status')}")
     super
@@ -151,7 +154,7 @@ class App.Views.AlertForm extends Backbone.View
       description = @$('input[name=description]').val()
       details = @$('textarea[name=details]').val()
       alert = new App.Models.Alert
-        assigned_to: assignedTo
+        assigned_to: {id: assignedTo}
         description: description
         details: details
       alert.save {},
