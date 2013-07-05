@@ -1,7 +1,8 @@
 class App.Router extends Backbone.Router
   routes:
-    "users/:id(/)": "user"
     "(/)": "home"
+    "users/:id(/)": "user"
+    "alerts/:alert_id(/)": "alert"
   user: (id) ->
     options = { user : { id: id } }
     contactMethods = new App.Collections.ContactMethods([], options)
@@ -28,7 +29,11 @@ class App.Router extends Backbone.Router
           $('.pagination-container').append(paginationView.el)
           $('.alert-actions').html(alertActions.render().el)
       data: { limit: 10, offset: 0 }
-
+  alert: (alert_id) ->
+    window.logEntries = new App.Collections.LogEntries({}, {alertId: alert_id})
+    logEntries.fetch success: ->
+      logEntriesView = new App.Views.LogEntries(collection: logEntries)
+      $ -> $('#le-table > table').append(logEntriesView.render().el)
 
 App.router = new App.Router()
 Backbone.history.start(pushState:true)

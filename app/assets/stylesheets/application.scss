@@ -137,3 +137,13 @@ body { background: #767676 url(https://pagerduty.cachefly.net/web/assets/bg-line
   border-bottom: 1px solid #ddd;
   background: #fff;
 }
+
+.triggered {
+  color: #a60000;
+}
+.acknowledged {
+  color: #ff4500;
+}
+.resolved {
+  color: #00a600;
+}

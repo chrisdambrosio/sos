@@ -1,7 +1,7 @@
 <table class="alert-details-table table table-condensed table-bordered">
   <tr>
     <th>Current status</th>
-    <td><%= @alert.status_name.capitalize %></td>
+    <td class="<%= @alert.status_name %>"><%= @alert.status_name.capitalize %></td>
   </tr>
   <tr>
     <th>Opened on</th>
@@ -23,16 +23,6 @@
           <th>Activity</th>
         </tr>
       </thead>
-      <tbody>
-      <tr>
-        <td>May 6, 2013 at 15:43 (2 months ago)</td>
-        <td>Assigned to Chris D'Ambrosio</td>
-      </tr>
-      <tr>
-        <td>May 6, 2013 at 15:43 (2 months ago)</td>
-        <td>Notified Chris D'Ambrosio by SMS at 619-337-4925</td>
-      </tr>
-      </tbody>
     </table>
   </div>
 </div>
