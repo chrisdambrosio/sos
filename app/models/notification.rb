@@ -1,29 +1,35 @@
 class Notification < ActiveRecord::Base
-  belongs_to :contact_method
   belongs_to :alert
+  belongs_to :user
   has_many :log_entries
-  validates :contact_method, presence: true
   validates :alert, presence: true
+  validates :user, presence: true
   scope :ready_to_send, -> { where(status: 'queued').where('send_at <= ?', Time.now) }
   before_create :before_create_hook
+
+  def contact_method=(contact_method)
+    self.address = contact_method.address
+    self.contact_type = contact_method.contact_type
+    self.user = contact_method.user
+  end
 
   def deliver
     account_sid = 'ACcd51106c4d0acaa0fc724076364ac9be'
     auth_token = '96a7560ca19c80bc79ae4afe9238828d'
 
     @client = Twilio::REST::Client.new(account_sid, auth_token)
-    case contact_method.contact_type
+    case contact_type
     when :sms
       @client.account.sms.messages.create(
         from: '8583975407',
-        to: contact_method.address,
+        to: address,
         body: alert.description
       )
     when :phone
       url = "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}"
       @client.account.calls.create(
         from: '8583975407',
-        to: contact_method.address,
+        to: address,
         url: url,
         method: 'GET'
       )
@@ -32,7 +38,7 @@ class Notification < ActiveRecord::Base
       client = Postmark::ApiClient.new(api_key, secure: true)
       client.deliver(
         from: 'chris_dambrosio@playstation.sony.com',
-        to: "#{contact_method.user.name} <#{contact_method.address}>",
+        to: "#{user.name} <#{address}>",
         subject: "Alert: #{alert.description}",
         text_body: alert.description
       )
@@ -41,7 +47,7 @@ class Notification < ActiveRecord::Base
   end
 
   def log_notification
-    LogEntry.create(alert: alert, action: 'notify', notification: self, user: contact_method.user)
+    LogEntry.create(alert: alert, action: 'notify', notification: self, user: user)
   end
 
   def contact_type
@@ -51,8 +57,6 @@ class Notification < ActiveRecord::Base
   private
 
   def before_create_hook
-    self.contact_type = contact_method.contact_type
-    self.address = contact_method.address
     self.status = 'queued'
   end
 end

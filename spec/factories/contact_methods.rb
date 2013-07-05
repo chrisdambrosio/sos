@@ -3,6 +3,6 @@ FactoryGirl.define do
     label "mobile"
     contact_type "sms"
     address "5555555555"
-    user { User.new }
+    user { create(:user, name: Faker::Name.name, email: Faker::Internet.email) }
   end
 end
