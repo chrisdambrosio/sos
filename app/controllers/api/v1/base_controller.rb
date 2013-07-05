@@ -9,7 +9,9 @@ class Api::V1::BaseController < ActionController::Base
   before_action :get_class
 
   def index
-    @response = sort(@query || @class).limit(@limit).offset(@offset)
+    @response = sort(@query || @class)
+    @total = @response.count
+    @response = @response.limit(@limit).offset(@offset)
     respond_after
   end
 
@@ -43,8 +45,7 @@ class Api::V1::BaseController < ActionController::Base
 
   def metadata
     if action_name == 'index'
-      total = @class.count
-      { meta: { total: total, limit: @limit, offset: @offset } }
+      { meta: { total: @total, limit: @limit, offset: @offset } }
     else
       {}
     end

@@ -12,7 +12,9 @@ Pagernova::Application.routes.draw do
         resources :contact_methods
         resources :notification_rules
       end
-      resources :alerts
+      resources :alerts do
+        resources :log_entries, only: [:index]
+      end
     end
   end
 end
