@@ -26,12 +26,11 @@ class Notification < ActiveRecord::Base
         body: alert.description
       )
     when :phone
-      url = "http://pagernova.herokuapp.com/twilio/phone?alert_id=#{alert.id}"
+      url = "http://pagernova.herokuapp.com/twilio/phone?notification_id=#{id}"
       @client.account.calls.create(
         from: '8583975407',
         to: address,
-        url: url,
-        method: 'GET'
+        url: url
       )
     when :email
       api_key = 'f37ce78c-7afc-4aa8-99a0-70b8f7635f65'

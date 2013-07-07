@@ -3,7 +3,8 @@ Pagernova::Application.routes.draw do
   get 'users' => 'users#index'
   get 'users/:id' => 'users#show', as: :user
   get 'twilio/sms' => 'twilio#sms'
-  get 'twilio/phone' => 'twilio#phone'
+  post 'twilio/phone' => 'twilio#phone'
+  post 'twilio/phone/input' => 'twilio#phone_input'
   get 'alerts/:id' => 'alerts#show'
   root to: 'home#index'
   namespace :api do

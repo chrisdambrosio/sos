@@ -1,6 +1,6 @@
 class TwilioController < ActionController::Base
   def sms
-    logger.info params
+    puts params
     twiml = Twilio::TwiML::Response.new do |r|
       r.Sms 'responding back'
     end
@@ -8,13 +8,69 @@ class TwilioController < ActionController::Base
   end
 
   def phone
-    logger.info params
-    alert = Alert.find(params[:alert_id])
-    twiml = Twilio::TwiML::Response.new do |r|
-      r.Say 'Hello, you have received the following alert:'
-      r.Say alert.description
-      r.Say ', Good bye!'
+    puts params
+    cookies[:notification_id] ||= params[:notification_id]
+    @notification = Notification.find(cookies[:notification_id])
+    @alert = @notification.alert
+    phone_main
+  end
+
+  def phone_input
+    puts params
+    @notification = Notification.find(cookies[:notification_id])
+    @alert = @notification.alert
+    @alert.agent = @notification.user
+    @alert.channel = { type: 'phone' }.to_json
+
+    case params[:Digits]
+    when 'TIMEOUT'
+      phone_timeout
+    when '4'
+      phone_acknowledge
+    when '6'
+      phone_resolve
+    when '0'
+      phone_main
+    else
+      # TODO: handle invalid input
     end
-    render text: twiml.text
+  end
+
+  private
+
+  def phone_main
+    @twiml = Twilio::TwiML::Response.new do |r|
+      r.Pause length: 1
+      r.Say ' You have received the following alert:'
+      r.Say @alert.description
+      r.Pause length: 1
+      r.Say "Press 4 to acknowledge, press 6 to resolve, or press 0 to repeat."
+      r.Gather(action: twilio_phone_input_path, numDigits: 1)
+      r.Redirect "#{twilio_phone_input_path}?Digits=TIMEOUT"
+    end
+    render text: @twiml.text
+  end
+
+  def phone_timeout
+    @twiml = Twilio::TwiML::Response.new do |r|
+      r.Say 'Good bye!'
+    end
+    render text: @twiml.text
+  end
+
+  def phone_acknowledge
+    @alert.acknowledged
+    @twiml = Twilio::TwiML::Response.new do |r|
+      r.Say 'The alert has been acknowledged, Good bye!'
+    end
+    render text: @twiml.text
+  end
+
+  def phone_resolve
+    @alert.resolved
+    @twiml = Twilio::TwiML::Response.new do |r|
+      r.Say 'The alert has been resolved, Good bye!'
+    end
+    render text: @twiml.text
   end
 end
