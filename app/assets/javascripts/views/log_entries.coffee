@@ -19,7 +19,10 @@ class App.Views.LogEntry extends Backbone.View
       " (#{moment(time).fromNow()})"
 
   channel: ->
-    "the website" if @model.get('channel').type is 'website'
+    switch @model.get('channel').type
+      when 'website' then 'the website'
+      when 'phone' then 'the phone'
+      when 'sms' then 'sms'
   agent: ->
     switch @model.get('agent').type
       when 'user'
