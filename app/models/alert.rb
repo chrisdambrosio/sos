@@ -2,6 +2,7 @@ class Alert < ActiveRecord::Base
   belongs_to :assigned_to, class_name: 'User', foreign_key: :assigned_to
   has_many :notifications
   has_many :log_entries
+  has_many :sms_reply_tokens
   validates :description, presence: true
   validates :assigned_to, presence: true
   default_scope -> { order(created_at: :desc) }
@@ -14,6 +15,7 @@ class Alert < ActiveRecord::Base
 
   state_machine :status, :initial => :triggered do
     after_transition :log_status_change, :on => all - [:triggered]
+    after_transition :after_resolved, :on => :resolved
     state :triggered,     value: 0
     state :acknowledged,  value: 1
     state :resolved,      value: 2
@@ -54,6 +56,10 @@ class Alert < ActiveRecord::Base
       log_assigned_to_change
       notify_user
     end
+  end
+
+  def after_resolved
+    sms_reply_tokens.each { |token| token.delete }
   end
 
   def log_status_change
