@@ -22,7 +22,7 @@ class App.Views.LogEntry extends Backbone.View
     switch @model.get('channel').type
       when 'website' then 'the website'
       when 'phone' then 'the phone'
-      when 'sms' then 'sms'
+      when 'sms' then 'SMS'
   agent: ->
     switch @model.get('agent').type
       when 'user'

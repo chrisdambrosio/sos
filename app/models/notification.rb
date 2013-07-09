@@ -20,13 +20,22 @@ class Notification < ActiveRecord::Base
     @client = Twilio::REST::Client.new(account_sid, auth_token)
     case contact_type
     when :sms
+      token = SmsReplyToken.create(
+        user: user,
+      )
       @client.account.sms.messages.create(
         from: '8583975407',
         to: address,
-        body: alert.description
+        body: "SOS##{alert.id}:#{alert.description} " +
+              "Reply #{token.acknowledge_code}:Ack, " +
+              "#{token.resolve_code}:Resolv"
       )
+      json = @client.last_response.body
+      source_address = JSON.parse(json)['to']
+      token.update_attributes(alert: alert, source_address: source_address)
     when :phone
-      url = "http://pagernova.herokuapp.com/twilio/phone?notification_id=#{id}"
+      #url = "http://pagernova.herokuapp.com/twilio/phone?notification_id=#{id}"
+      url = "http://home.unc0nnected.net:2342/twilio/phone?notification_id=#{id}"
       @client.account.calls.create(
         from: '8583975407',
         to: address,

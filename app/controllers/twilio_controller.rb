@@ -1,8 +1,22 @@
 class TwilioController < ActionController::Base
   def sms
-    puts params
-    twiml = Twilio::TwiML::Response.new do |r|
-      r.Sms 'responding back'
+    tokens = SmsReplyToken.where(source_address: params['From'])
+    @token = tokens.with_reply_code(params['Body'])
+
+    if @token
+      @alert = @token.alert
+      @alert.agent = @token.user
+      @alert.channel = { type: 'sms' }.to_json
+    end
+
+    if @token && @alert.fire_status_event(@token.status_event)
+      twiml = Twilio::TwiML::Response.new do |r|
+        r.Sms "SOS##{@alert.id} has been #{@token.status_event}."
+      end
+    else
+      twiml = Twilio::TwiML::Response.new do |r|
+        r.Sms 'Command not understood.'
+      end
     end
     render text: twiml.text
   end

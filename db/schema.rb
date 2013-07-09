@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130705200309) do
+ActiveRecord::Schema.define(version: 20130709000556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,19 @@ ActiveRecord::Schema.define(version: 20130705200309) do
 
   add_index "notifications", ["alert_id"], name: "index_notifications_on_alert_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "sms_reply_tokens", force: true do |t|
+    t.integer  "alert_id"
+    t.integer  "user_id"
+    t.integer  "acknowledge_code"
+    t.integer  "resolve_code"
+    t.string   "source_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sms_reply_tokens", ["alert_id"], name: "index_sms_reply_tokens_on_alert_id", using: :btree
+  add_index "sms_reply_tokens", ["user_id"], name: "index_sms_reply_tokens_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
