@@ -11,7 +11,7 @@ class Api::V1::BaseController < ActionController::Base
   def index
     @response = sort(@query || @class)
     @total = @response.count
-    @response = @response.limit(@limit).offset(@offset)
+    @response = @response.limit(@limit).offset(@offset).order(created_at: :desc)
     respond_after
   end
 

@@ -5,7 +5,6 @@ class Alert < ActiveRecord::Base
   has_many :sms_reply_tokens
   validates :description, presence: true
   validates :assigned_to, presence: true
-  default_scope -> { order(created_at: :desc) }
   scope :assigned, -> { where(status: 'assigned') }
   scope :opened_status, -> { where.not(status: 'resolved') }
   after_save :after_save_hook
