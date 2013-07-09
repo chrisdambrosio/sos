@@ -26,7 +26,7 @@ class Notification < ActiveRecord::Base
       @client.account.sms.messages.create(
         from: '8583975407',
         to: address,
-        body: "SOS##{alert.id}:#{alert.description} " +
+        body: "SOS##{alert.id}: #{alert.description}. " +
               "Reply #{token.acknowledge_code}:Ack, " +
               "#{token.resolve_code}:Resolv"
       )
