@@ -1,4 +1,4 @@
-Pagernova::Application.routes.draw do
+Sos::Application.routes.draw do
   devise_for :users
   get 'users' => 'users#index'
   get 'users/:id' => 'users#show', as: :user

@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Pagernova::Application.config.secret_key_base = 'e79040b7af4af035c9180d79f12321dc3cd6b604b8feb4c34129bcc873320397ed74b2eef55bb5b5bf7efdd6e599f468295aa49867101c0dd16bf0165e08bb5b'
+Sos::Application.config.secret_key_base = 'e79040b7af4af035c9180d79f12321dc3cd6b604b8feb4c34129bcc873320397ed74b2eef55bb5b5bf7efdd6e599f468295aa49867101c0dd16bf0165e08bb5b'

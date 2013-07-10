@@ -55,6 +55,8 @@ gem 'ejs'
 
 gem 'responders'
 
+gem 'phony_rails'
+
 gem 'twilio-ruby'
 gem 'postmark'
 
@@ -64,6 +66,8 @@ gem 'sucker_punch'
 gem 'devise', '3.0.0.rc'
 
 gem 'state_machine'
+
+gem 'rename'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

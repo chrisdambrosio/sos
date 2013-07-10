@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pagernova::Application.load_tasks
+Sos::Application.load_tasks
