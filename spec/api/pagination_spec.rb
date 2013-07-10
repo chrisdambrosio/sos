@@ -7,7 +7,7 @@ describe "pagination offset/limit/count", :type => :api do
       create :user,
         { name: Faker::Name.name, email: Faker::Internet.email }
     end
-    @users = User.all
+    @users = User.all.order(created_at: :asc)
   end
 
   it 'should have the correct total in json' do
@@ -37,7 +37,7 @@ describe "pagination offset/limit/count", :type => :api do
   it 'should implement the offset parameter' do
     get "/api/v1/users.json?offset=4"
     users = JSON.parse(response.body)['users']
-    expect(users[0]['id']).to eq(@users[4].id)
+    expect(users[0]['id']).to eq(@users[@users.count - 5].id)
   end
 
   it 'should show the offset in json' do
