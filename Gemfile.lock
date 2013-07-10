@@ -167,7 +167,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     state_machine (1.2.0)
-    sucker_punch (0.5.1)
+    sucker_punch (1.0.0.beta2)
       celluloid (~> 0.14.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
@@ -230,7 +230,7 @@ DEPENDENCIES
   sdoc
   shoulda
   state_machine
-  sucker_punch
+  sucker_punch (= 1.0.0.beta2)
   therubyracer
   turbolinks
   twilio-ruby

@@ -4,4 +4,6 @@ require 'clockwork'
 
 include Clockwork
 
-every(1.minutes, 'Queueing interval job') { TestWorker.new.perform }
+every(30.seconds, 'NotificationsJob') do
+  NotificationsJob.new.async.perform
+end

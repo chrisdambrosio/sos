@@ -18,7 +18,7 @@ class Api::V1::AlertsController < Api::V1::BaseController
     strong_params.delete('status')
     @response = Alert.new(strong_params)
     if @response = Alert.create(strong_params)
-      SuckerPunch::Queue[:alert_queue].async.perform
+      NotificationsJob.new.async.perform
     end
     respond_after
   end
