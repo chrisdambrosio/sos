@@ -16,8 +16,8 @@ class UserSchedule < ActiveRecord::Base
     timeline = Timeline.new(start_time, end_time)
     start_time -= rotation_duration
     rotation_schedule.occurrences_between(start_time, end_time).each do |o|
-      timeline.add_timeline_entry(TimelineEntry.new(
-        o.start_time, o.start_time + rotation_duration
+      timeline.add_timeline_entry(ScheduleEntry.new(
+        o.start_time, o.start_time + rotation_duration, user: user
       ))
     end
     timeline.timeline_entries

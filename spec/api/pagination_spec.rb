@@ -2,10 +2,10 @@ require "spec_helper"
 
 describe "pagination offset/limit/count", :type => :api do
   before do
+    User.delete_all
     @user_count = 6
     @user_count.times do
-      create :user,
-        { name: Faker::Name.name, email: Faker::Internet.email }
+      create :user
     end
     @users = User.all.order(created_at: :asc)
   end

@@ -9,15 +9,19 @@ describe ScheduleLayer do
 
   describe '#timeline_entries' do
     before do
-      user_schedule1 = create :user_schedule,
+      create :user_schedule,
         schedule_layer: subject, position: 0, user: build(:user)
-      user_schedule2 = create :user_schedule,
+      create :user_schedule,
         schedule_layer: subject, position: 1, user: build(:user)
       @entries = subject.timeline_entries(Time.new(2013,7,8), Time.new(2013,7,15))
     end
 
-    it 'returns timeline entries' do
-      expect(@entries[0]).to be_kind_of(TimelineEntry)
+    it 'returns schedule_entries' do
+      expect(@entries[0]).to be_kind_of(ScheduleEntry)
+    end
+
+    it 'has a user in the entries' do
+      expect(@entries[0].user).to be_a(User)
     end
   end
 end
