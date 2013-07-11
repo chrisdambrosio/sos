@@ -18,10 +18,12 @@ class TimelineEntry
   def constrain_within(constraint)
     tl_entry = self.clone
     if start_time < constraint.start_time
-      tl_entry = self.class.new(constraint.start_time, tl_entry.end_time)
+      tl_entry.instance_variable_set('@start_time', constraint.start_time)
+      tl_entry.instance_variable_set('@end_time', tl_entry.end_time)
     end
     if end_time > constraint.end_time
-      tl_entry = self.class.new(tl_entry.start_time, constraint.end_time)
+      tl_entry.instance_variable_set('@start_time', tl_entry.start_time)
+      tl_entry.instance_variable_set('@end_time', constraint.end_time)
     end
     tl_entry
   end
