@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130710074439) do
+ActiveRecord::Schema.define(version: 20130711015321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(version: 20130710074439) do
 
   add_index "notifications", ["alert_id"], name: "index_notifications_on_alert_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "restrictions", force: true do |t|
+    t.integer  "schedule_layer_id"
+    t.integer  "start_day_of_week"
+    t.integer  "end_day_of_week"
+    t.integer  "start_time_of_day"
+    t.integer  "end_time_of_day"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "restrictions", ["schedule_layer_id"], name: "index_restrictions_on_schedule_layer_id", using: :btree
 
   create_table "schedule_layers", force: true do |t|
     t.datetime "start_time"

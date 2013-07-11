@@ -178,6 +178,7 @@ GEM
       atomic
     tilt (1.4.1)
     timers (1.1.0)
+    tod (1.1.1)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -234,6 +235,7 @@ DEPENDENCIES
   state_machine
   sucker_punch (= 1.0.0.beta2)
   therubyracer
+  tod
   turbolinks
   twilio-ruby
   twitter-bootstrap-rails
