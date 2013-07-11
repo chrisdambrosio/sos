@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130711015321) do
+ActiveRecord::Schema.define(version: 20130711081802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,12 +90,12 @@ ActiveRecord::Schema.define(version: 20130711015321) do
   add_index "restrictions", ["schedule_layer_id"], name: "index_restrictions_on_schedule_layer_id", using: :btree
 
   create_table "schedule_layers", force: true do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.integer  "priority"
     t.integer  "rotation_duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "sms_reply_tokens", force: true do |t|
