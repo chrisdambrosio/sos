@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130709000556) do
+ActiveRecord::Schema.define(version: 20130710074439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(version: 20130709000556) do
   add_index "notifications", ["alert_id"], name: "index_notifications_on_alert_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
+  create_table "schedule_layers", force: true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "priority"
+    t.integer  "rotation_duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sms_reply_tokens", force: true do |t|
     t.integer  "alert_id"
     t.integer  "user_id"
@@ -89,6 +98,17 @@ ActiveRecord::Schema.define(version: 20130709000556) do
 
   add_index "sms_reply_tokens", ["alert_id"], name: "index_sms_reply_tokens_on_alert_id", using: :btree
   add_index "sms_reply_tokens", ["user_id"], name: "index_sms_reply_tokens_on_user_id", using: :btree
+
+  create_table "user_schedules", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "position"
+    t.integer  "schedule_layer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_schedules", ["schedule_layer_id"], name: "index_user_schedules_on_schedule_layer_id", using: :btree
+  add_index "user_schedules", ["user_id"], name: "index_user_schedules_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
