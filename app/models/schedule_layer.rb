@@ -1,4 +1,5 @@
 class ScheduleLayer < ActiveRecord::Base
+  belongs_to :schedule
   has_many :user_schedules
   has_many :restrictions
   validates :start_time, presence: true

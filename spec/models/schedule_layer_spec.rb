@@ -6,6 +6,7 @@ describe ScheduleLayer do
   it { should validate_presence_of :start_time }
   it { should validate_presence_of :rotation_duration }
   it { should have_many(:user_schedules) }
+  it { should belong_to(:schedule) }
 
   describe '#timeline_entries' do
     before do
