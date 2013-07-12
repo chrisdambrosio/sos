@@ -9,7 +9,7 @@ describe UserSchedule do
 
   describe '#timeline_entries' do
     before do
-      @entries = subject.timeline_entries(Time.new(2013,7,8), Time.new(2013,7,15))
+      @entries = subject.timeline_entries(Time.utc(2013,7,8), Time.utc(2013,7,15))
     end
 
     it 'returns timeline entries' do
@@ -23,7 +23,7 @@ describe UserSchedule do
 
     it 'returns the correct quantity with rotation interval of 2' do
       create(:user_schedule, position: 1, schedule_layer: subject.schedule_layer)
-      entries = subject.timeline_entries(Time.new(2013,7,8), Time.new(2013,7,15))
+      entries = subject.timeline_entries(Time.utc(2013,7,8), Time.utc(2013,7,15))
       expect(entries.count).to eq(4)
     end
 
