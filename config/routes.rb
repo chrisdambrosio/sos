@@ -16,6 +16,7 @@ Sos::Application.routes.draw do
       resources :alerts do
         resources :log_entries, only: [:index]
       end
+      resources :schedules
     end
   end
 end
