@@ -3,6 +3,8 @@ class App.Router extends Backbone.Router
     "(/)": "home"
     "users/:id(/)": "user"
     "alerts/:alert_id(/)": "alert"
+    "schedules(/)": "schedules"
+    "schedules/:id": "schedule"
   user: (id) ->
     options = { user : { id: id } }
     contactMethods = new App.Collections.ContactMethods([], options)
@@ -34,6 +36,22 @@ class App.Router extends Backbone.Router
     logEntries.fetch success: ->
       logEntriesView = new App.Views.LogEntries(collection: logEntries)
       $ -> $('#le-table > table').append(logEntriesView.render().el)
+  schedules: ->
+    window.schedules = new App.Collections.Schedules()
+    schedules.fetch
+      data: { limit: 10, offset: 0 }
+      success: ->
+        schedulesView = new App.Views.Schedules.Index
+          collection: schedules
+        $ -> $('#schedules-page-content').html(schedulesView.render().el)
+  schedule: (id) ->
+    window.schedule = new App.Models.Schedule(id:id)
+    schedule.fetch
+      reset: true
+      success: ->
+        window.view = new App.Views.Schedules.Show
+          model: schedule
+        $ -> $('#schedules-page-content').html(view.render().el)
 
 App.router = new App.Router()
 Backbone.history.start(pushState:true)

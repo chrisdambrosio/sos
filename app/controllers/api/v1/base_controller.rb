@@ -85,7 +85,9 @@ class Api::V1::BaseController < ActionController::Base
   end
 
   def internal_server_error
-    render json: { error: 'internal server error' }, status: :internal_server_error
+    raise if Rails.env.development?
+    render json: { error: 'internal server error' },
+      status: :internal_server_error
   end
 
   def respond_after

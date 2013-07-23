@@ -1,7 +1,7 @@
 class ScheduleEntry < TimelineEntry
+  include ActiveModel::Serialization
   include ActiveModel::Conversion
   include ActiveModel::Naming
-  include ActiveModel::Serialization
   attr_accessor :user
   attr_reader :start_time, :end_time, :attributes
   def initialize(start_time, end_time, options={})

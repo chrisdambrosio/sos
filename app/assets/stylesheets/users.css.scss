@@ -1,21 +1,14 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-#contact-method-list {
-  padding-top: 10px;
-}
+@import 'shared-mixins';
 
 #contact-method-list, .notification-rule-list {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+  @include bordered-section;
+  padding: 0;
   padding-top: 10px;
-  border-radius: 4px;
-  border-collapse: separate;
-  border: 1px solid #BBBBBB;
-  width: 100%;
-  margin-bottom: 18px;
 }
+
 .contact-method-list, .contact-method-group {
   margin: 0 10px 10px;
   padding: 0px 10px;

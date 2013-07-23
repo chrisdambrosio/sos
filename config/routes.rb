@@ -1,7 +1,10 @@
 Sos::Application.routes.draw do
+  get "schedules/index"
   devise_for :users
   get 'users' => 'users#index'
   get 'users/:id' => 'users#show', as: :user
+  get 'schedules' => 'schedules#index'
+  get 'schedules/:id' => 'schedules#index'
   get 'twilio/sms' => 'twilio#sms'
   post 'twilio/phone' => 'twilio#phone'
   post 'twilio/phone/input' => 'twilio#phone_input'

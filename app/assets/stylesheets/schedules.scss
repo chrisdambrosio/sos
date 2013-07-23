@@ -1,0 +1,5 @@
+@import 'shared-mixins';
+
+.schedule-summary {
+  @include bordered-section;
+}
