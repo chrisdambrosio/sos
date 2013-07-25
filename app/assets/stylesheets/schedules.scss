@@ -3,3 +3,100 @@
 .schedule-summary {
   @include bordered-section;
 }
+
+.timelines-main {
+  position: relative;
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+}
+
+.timelines-section {
+  position: relative;
+}
+
+.timelines-container, .timeline-date-labels {
+  left: 200px;
+}
+
+.timelines-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.timelines-section {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.timeline-unit {
+  top: 0;
+  height: 100%;
+  position: absolute;
+  border-left: 1px dotted #ddd;
+}
+
+.timeline-date-labels {
+  position: absolute;
+  top: 0;
+  height: 20px;
+  right: 0;
+}
+
+.timeline-date-label {
+  position: absolute;
+  top: 3px;
+  padding-left: 4px;
+  color: #666;
+  font-size: 11px;
+}
+
+.timeline-layer {
+  height: 30px;
+  position: relative;
+}
+
+.timeline-layer-info {
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.timeline-layer-grid {
+  left: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 22px;
+  margin: 4px 0;
+  overflow: hidden;
+}
+
+.timeline-layer-name {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  height: 22px;
+  line-height: 22px;
+  margin-right: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.timeline-bar {
+  background-color: gray;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  border-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  overflow: hidden;
+}

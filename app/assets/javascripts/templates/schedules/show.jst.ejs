@@ -1,9 +1,16 @@
-<div class="timelines-container">
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
+<% var widthPct = 100.0 / this.days; %>
+<div class="timelines-main">
+  <div class="timelines-section">
+    <div class="timeline-date-labels">
+      <% for (var i=0; i < this.days; i++) {%>
+        <div class="timeline-date-label" style="left:<%= widthPct * i %>%;"><%= moment(this.startOfWeek).add('days', i).format('dd M/D') %></div>
+    <% } %>
+
+    </div>
+    <div class="timelines-container">
+      <% for (var i=0; i < this.days; i++) {%>
+        <div class="timeline-unit" style="width:<%= widthPct %>%;left:<%= widthPct * i %>%;"></div>
+    <% } %>
+    </div>
+  </div>
 </div>

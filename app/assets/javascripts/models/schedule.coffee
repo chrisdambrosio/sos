@@ -1,13 +1,19 @@
 class App.Models.Schedule extends Backbone.Model
-  #initialize: (options) ->
-    #@user = options.user or @collection.user
+  initialize: (options={}) ->
+    @on 'change:schedule_layers', @setScheduleLayers
+    @days = options.days
   url: ->
     if @id
       "/api/v1/schedules/#{@id}.json"
     else
       "/api/v1/schedules.json"
-  #defaults:
-    #start_delay: 0
-    #contact_method_id: null
+  parse: (response) ->
+    if response.schedule
+      response.schedule
+    else
+      response
   toJSON: ->
     { schedule: @attributes }
+  setScheduleLayers: ->
+    @scheduleLayers =
+      new App.Models.ScheduleLayer(layer) for layer in @.get('schedule_layers')

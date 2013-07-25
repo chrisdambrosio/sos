@@ -45,13 +45,26 @@ class App.Router extends Backbone.Router
           collection: schedules
         $ -> $('#schedules-page-content').html(schedulesView.render().el)
   schedule: (id) ->
-    window.schedule = new App.Models.Schedule(id:id)
+    days = 7
+    window.startOfWeek = moment().utc().isoWeekday(1).hour(0).minute(0).second(0).millisecond(0)
+    window.endOfTimeline = moment(startOfWeek).add('days', days)
+    window.schedule = new App.Models.Schedule(id:id, days:days)
     schedule.fetch
       reset: true
+      data: (since:startOfWeek.toISOString(), until:endOfTimeline.toISOString())
       success: ->
-        window.view = new App.Views.Schedules.Show
+        window.scheduleView = new App.Views.Schedules.Show
           model: schedule
-        $ -> $('#schedules-page-content').html(view.render().el)
+          startOfWeek: startOfWeek
+        scheduleView.render()
+        for layer in schedule.scheduleLayers
+          window.layerView = new App.Views.ScheduleLayer
+            model: layer
+            schedule: schedule
+            startOfWeek: startOfWeek
+          scheduleView.$el.find('.timelines-section').append(layerView.render().el)
+        $ ->
+          $('#schedules-page-content').html(scheduleView.el)
 
 App.router = new App.Router()
 Backbone.history.start(pushState:true)
