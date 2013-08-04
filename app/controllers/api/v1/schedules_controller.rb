@@ -10,12 +10,8 @@ class Api::V1::SchedulesController < Api::V1::BaseController
     @response = @class.find params[:id]
 
     if params[:since] && params[:until]
-      @since = Time.parse(params[:since])
-      @until = Time.parse(params[:until])
-      @response.schedule_layers.each do |sl|
-        sl.schedule_entries =
-          sl.timeline_entries(@since, @until)
-      end
+      @response.since = Time.parse(params[:since])
+      @response.until = Time.parse(params[:until])
     end
 
     respond_after

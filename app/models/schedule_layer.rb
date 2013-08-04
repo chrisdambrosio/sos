@@ -4,7 +4,12 @@ class ScheduleLayer < ActiveRecord::Base
   has_many :restrictions
   validates :start_time, presence: true
   validates :rotation_duration, presence: true
+  validates :position, presence: true
   attr_accessor :schedule_entries
+
+  def user_schedules
+    super.order(:position)
+  end
 
   def rotation_interval
     user_schedules.count
