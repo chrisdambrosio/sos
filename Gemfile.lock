@@ -95,6 +95,7 @@ GEM
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
+    newrelic_rpm (3.6.6.147)
     orm_adapter (0.4.0)
     pg (0.15.1)
     phony (1.9.0)
@@ -228,6 +229,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   json_spec
+  newrelic_rpm
   pg
   phony_rails
   postmark
