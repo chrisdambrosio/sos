@@ -5,7 +5,8 @@
 }
 
 .timelines-main {
-  position: relative;
+  position: static;
+  margin-left: 250px;
   border-left: 1px solid #c2c2c2;
   border-right: 1px solid #c2c2c2;
 }
@@ -99,4 +100,22 @@
   cursor: pointer;
   z-index: 10;
   overflow: hidden;
+}
+
+.timelines-section-header {
+  position: relative;
+  height: 36px;
+  background-color: #f5f5f5;
+  h3 {
+    margin: 0 0 0 6px;
+    line-height: 36px;
+    font-size: 15px;
+    color: #333333;
+  }
+}
+
+.show-sched-sidebar-buttons a.btn {
+  width: 240px;
+  box-sizing: border-box;
+  font-size: 13px;
 }

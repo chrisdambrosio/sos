@@ -58,11 +58,16 @@ class App.Router extends Backbone.Router
           startOfWeek: startOfWeek
         scheduleView.render()
         for layer in schedule.scheduleLayers
-          window.layerView = new App.Views.ScheduleLayer
+          layerView = new App.Views.ScheduleLayer
             model: layer
             schedule: schedule
             startOfWeek: startOfWeek
-          scheduleView.$el.find('.timelines-section').append(layerView.render().el)
+          scheduleView.$el.find('.team-schedule').append(layerView.render().el)
+        finalLayerView = new App.Views.ScheduleLayer
+          model: schedule.finalSchedule
+          schedule: schedule
+          startOfWeek: startOfWeek
+        scheduleView.$el.find('.final-schedule').append(finalLayerView.render().el)
         $ ->
           $('#schedules-page-content').html(scheduleView.el)
 

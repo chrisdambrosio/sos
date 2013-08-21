@@ -1,6 +1,26 @@
 <% var widthPct = 100.0 / this.days; %>
+<div class="sidebar-left">
+  <div class="show-sched-sidebar-buttons">
+    <a class="edit-schedule btn">Edit Schedule</a>
+  </div>
+</div>
 <div class="timelines-main">
-  <div class="timelines-section">
+  <div class="timelines-section-header"><h3>Schedule Layers</h3></div>
+  <div class="timelines-section team-schedule">
+    <div class="timeline-date-labels">
+      <% for (var i=0; i < this.days; i++) {%>
+        <div class="timeline-date-label" style="left:<%= widthPct * i %>%;"><%= moment(this.startOfWeek).add('days', i).format('dd M/D') %></div>
+    <% } %>
+
+    </div>
+    <div class="timelines-container">
+      <% for (var i=0; i < this.days; i++) {%>
+        <div class="timeline-unit" style="width:<%= widthPct %>%;left:<%= widthPct * i %>%;"></div>
+    <% } %>
+    </div>
+  </div>
+  <div class="timelines-section-header"><h3>Final Schedule</h3></div>
+  <div class="timelines-section final-schedule">
     <div class="timeline-date-labels">
       <% for (var i=0; i < this.days; i++) {%>
         <div class="timeline-date-label" style="left:<%= widthPct * i %>%;"><%= moment(this.startOfWeek).add('days', i).format('dd M/D') %></div>
