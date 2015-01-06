@@ -16,6 +16,7 @@ class Notification < ActiveRecord::Base
   def deliver
     account_sid = ENV.fetch('TWILIO_ACCOUNT')
     auth_token = ENV.fetch('TWILIO_TOKEN')
+    phone_number = ENV.fetch('TWILIO_NUMBER')
 
     @client = Twilio::REST::Client.new(account_sid, auth_token)
     case contact_type
@@ -24,7 +25,7 @@ class Notification < ActiveRecord::Base
         user: user,
       )
       @client.account.sms.messages.create(
-        from: '8583975407',
+        from: phone_number,
         to: address,
         body: "SOS##{alert.id}: #{alert.description}. " +
               "Reply #{token.acknowledge_code}:Ack, " +
@@ -36,7 +37,7 @@ class Notification < ActiveRecord::Base
     when :phone
       url = "http://pagernova.herokuapp.com/twilio/phone?notification_id=#{id}"
       @client.account.calls.create(
-        from: '8583975407',
+        from: phone_number,
         to: address,
         url: url
       )
