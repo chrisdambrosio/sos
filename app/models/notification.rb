@@ -14,8 +14,8 @@ class Notification < ActiveRecord::Base
   end
 
   def deliver
-    account_sid = 'ACcd51106c4d0acaa0fc724076364ac9be'
-    auth_token = '96a7560ca19c80bc79ae4afe9238828d'
+    account_sid = ENV.fetch('TWILIO_ACCOUNT')
+    auth_token = ENV.fetch('TWILIO_TOKEN')
 
     @client = Twilio::REST::Client.new(account_sid, auth_token)
     case contact_type
