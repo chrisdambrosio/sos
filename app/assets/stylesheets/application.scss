@@ -16,8 +16,10 @@
  *= require_tree .
  */
 
+body { background-color: #EAEAEA !important; }
+
 body > div.navbar > div.navbar-inner {
-  background: #DADADA;
+  background: #E4E1D2;
   a.brand { padding: 0 10px; }
 }
 
