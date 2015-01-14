@@ -35,7 +35,7 @@ class Notification < ActiveRecord::Base
       source_address = JSON.parse(json)['to']
       token.update_attributes(alert: alert, source_address: source_address)
     when :phone
-      url = "http://pagernova.herokuapp.com/twilio/phone?notification_id=#{id}"
+      url = "http://sosapp.herokuapp.com/twilio/phone?notification_id=#{id}"
       @client.account.calls.create(
         from: phone_number,
         to: address,
